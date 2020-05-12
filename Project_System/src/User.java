@@ -1,5 +1,6 @@
 public class User {
     //User Informations
+    System access;
     int id ;
     String username;
     String password;
