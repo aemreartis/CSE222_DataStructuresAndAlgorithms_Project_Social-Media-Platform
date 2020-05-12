@@ -1,2 +1,0 @@
-# CSE222_PROJECT
-CSE 222 Project 
