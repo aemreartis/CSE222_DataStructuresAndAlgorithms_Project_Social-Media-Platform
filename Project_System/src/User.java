@@ -42,10 +42,19 @@ public class User {
     public boolean editPassword(String password);
     public boolean editName(String name);
     public boolean editSurname(String surname);
+    public boolean editBirthDate(Date birthDate);
+    public String editDepartment();
+    public String editEmail();
+    public String editTitle();
+    
     public String getName();
     public String getSurname();
     public String getTitle();
-
+    public Date getBirthDate();
+    public String getDepartment();
+    public String getEmail();
+    public String getTitle();
+        
     public Schedule getSchedule();
 
 
@@ -82,7 +91,10 @@ public class User {
     //Other System Interactions
     public Queue<Notification> getNotifications();
     public boolean removeNotification();
-
+    public boolean addPost();
+    public boolean deletePost();
+    
+    public void removeMyProfile();
 
 
 }
