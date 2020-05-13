@@ -32,7 +32,7 @@ public class User {
 
 
     //Other System Variables
-    BinarySearchTree<Event> events;//???
+    List<Event> events;//???
     Queue<Notification> notifications; //Or stack
 
 
