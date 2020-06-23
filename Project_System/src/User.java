@@ -18,35 +18,56 @@ public class User {
 
     Schedule weeklySchedule;
 
-    Queue<Post> posts;
-    Queue<Post> myPosts;
+    Queue<Integer> posts;
+    Queue<Integer> myPosts;
 
     //Hobbies
-    LinkedList<Movie> movies;
-    LinkedList<Music> musics;
-    LinkedList<Book> books;
+    LinkedList<Integer> movieIds;
+    LinkedList<Integer> musicIds;
+    LinkedList<Integer> bookIds;
 
-    ArrayList<Interest> myInterests; // ???
+    ArrayList<Integer> myInterestIds; // ???
 
 
     //FriendList (and Interaction data if needed any)
-    ArrayList<User> friendList;//Students, Groups and Lecturers
+    ArrayList<Integer> friendIdList;//Students, Groups and Lecturers
 
 
-    List<Event> friendEvents;
+    List<Integer> friendEventIds;
 
 
     //Other System Variables
-    List<Event> events;//???
-    Queue<Notification> notifications; //Or stack
+    List<Integer> eventIds;//???
+    Queue<Integer> notificationIds; //Or stack
 
-    public Schedule getWeeklySchedule() {
-        return weeklySchedule;
-    }
-
-    public void setWeeklySchedule(Schedule weeklySchedule) {
+    public User(System access, int id, String username, String password, String name, String surname,
+                Date birthDate, String department, String email, String title, Schedule weeklySchedule,
+                Queue<Integer> posts, Queue<Integer> myPosts, LinkedList<Integer> movieIds, LinkedList<Integer> musicIds,
+                LinkedList<Integer> bookIds, ArrayList<Integer> myInterestIds, ArrayList<Integer> friendIdList,
+                List<Integer> friendEventIds, List<Integer> eventIds, Queue<Integer> notificationIds) {
+        this.access = access;
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.birthDate = birthDate;
+        this.department = department;
+        this.email = email;
+        this.title = title;
         this.weeklySchedule = weeklySchedule;
+        this.posts = posts;
+        this.myPosts = myPosts;
+        this.movieIds = movieIds;
+        this.musicIds = musicIds;
+        this.bookIds = bookIds;
+        this.myInterestIds = myInterestIds;
+        this.friendIdList = friendIdList;
+        this.friendEventIds = friendEventIds;
+        this.eventIds = eventIds;
+        this.notificationIds = notificationIds;
     }
+
 
     //User Information Methods
     public boolean editUsername(String username) {
@@ -141,24 +162,36 @@ public class User {
 
 
     //Friend Interactions
-    public boolean addFriend(User newFriend) {
-        friendList.add(newFriend);
+    public boolean addFriend(Integer newFriendId) {
+        friendIdList.add(newFriendId);
         return false;
     }
 
     public boolean removeFriend(int friendId){
 
-        friendList.remove(friendId);
+        friendIdList.remove(friendId);
         return true;
     }
 
-    public User getFriend(int friendId) {
-        return friendList.get(friendId);
+    public Integer getFriend(int friendId) {
+        return friendIdList.get(friendId);
     }
 
-    public List<User> getFriendList() {
-        return friendList;
+    public List<Integer> getFriendIdList() {
+        return null;
     }
+
+    public ArrayList<TimeFrame> compareSchedule(Schedule friendSchedule) {
+
+
+        return null;
+    }
+
+    public ArrayList<TimeFrame> findTimeFrames() {
+        return null;
+    }
+
+
 /******************************************************************************************/
     /**
      * 2 kişinin şheduele lrindeki course lar birleşti
@@ -606,41 +639,44 @@ public class User {
     }
 
 /**************************************************************************************************/
+  
+
     //Event Interactions
-    public boolean addEvent(Event event) {
-        return events.add(event);
+    public boolean addEvent(Integer eventId) {
+        return eventIds.add(eventId);
     }
 
 
-    public boolean removeEvent(Event event){
-        return events.remove(event);
+    public boolean removeEvent(Integer eventId){
+        return eventIds.remove(eventId);
     }
 
-    public Event getEvent(int eventId){
-        return events.get(eventId);
+    public Integer getEvent(int eventId){
+        return eventIds.get(eventId);
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public List<Integer> getEventIds() {
+        return eventIds;
     }
 
-    public List<Event> getFriendEvents(){
-        return friendEvents;
+    public List<Integer> getFriendEventIds(){
+        return friendEventIds;
     }
 
 
     //Other System Interactions
-    public Queue<Notification> getNotifications() {
-        return notifications;
+    public Queue<Integer> getNotificationIds() {
+        return notificationIds;
     }
 
     public boolean removeNotification(int notifyId) {
-        return notifications.remove(notifyId);
+        return notificationIds.remove(notifyId);
     }
 
-    public boolean addPost(String postContent) {
+    public void addPost(String postContent) {
         Post newPost=new Post(postContent, new Calendar(), this);
-        return posts.add(newPost);
+        Integer newPostId = newPost.getId();
+        posts.add(newPostId);
     }
 
     public boolean deletePost(int postId) {
