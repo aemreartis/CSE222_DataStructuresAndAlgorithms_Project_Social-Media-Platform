@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class User {
     //User Informations
     System access;
@@ -7,7 +12,7 @@ public class User {
     String name;
     String surname;
     Date birthDate;
-    String Department;
+    String department;
     String email;
     String title;
 
@@ -36,65 +41,171 @@ public class User {
     Queue<Notification> notifications; //Or stack
 
 
-
     //User Information Methods
-    public boolean editUsername(String username);
-    public boolean editPassword(String password);
-    public boolean editName(String name);
-    public boolean editSurname(String surname);
-    public boolean editBirthDate(Date birthDate);
-    public String editDepartment();
-    public String editEmail();
-    public String editTitle();
-    
-    public String getName();
-    public String getSurname();
-    public String getTitle();
-    public Date getBirthDate();
-    public String getDepartment();
-    public String getEmail();
-    public String getTitle();
-        
-    public Schedule getSchedule();
+    public boolean editUsername(String username) {
+        this.username= username;
+        java.lang.System.out.println("Username editted succesfully.");
+        return true;
+    }
+
+    public boolean editPassword(String password) {
+        this.password= password;
+        java.lang.System.out.println("Password editted succesfully.");
+        return true;
+    }
+
+    public boolean editName(String name) {
+        this.name=name;
+        java.lang.System.out.println("Name editted succesfully.");
+        return true;
+    }
+
+    public boolean editSurname(String surname) {
+        this.surname=surname;
+        java.lang.System.out.println("Surname editted succesfully.");
+        return true;
+    }
+
+
+    public boolean editBirthDate(int day,int month,int year) {//parametreler stringe dönüştürebiliriz
+        Date newDate=new Date(day,month,year);
+        this.birthDate=newDate;
+        java.lang.System.out.println("Birth date editted succesfully.");
+        return true;
+    }
+
+    public boolean editDepartment(String department) {
+        this.department = department;
+        return true;
+    }
+
+    public boolean editEmail(String email) {
+        this.email = email;
+        return true;
+    }
+
+    public boolean editTitle(String title) {
+        this.title = title;
+        return true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public Schedule getSchedule() {
+        return weeklySchedule;
+    }
 
 
     //Schedule editting
-    public boolean addCourse(Course course);//Parameter may be course id.
-    public Course removeCourse(Course course)
-    public void clearSchedule();
+    public boolean addCourse(Course course){
+        return weeklySchedule.addCourse(course);
+    }
+
+    public boolean removeCourse(Course course) {
+        return weeklySchedule.removeCourse(course);
+    }
+
+    public void clearSchedule() {
+        weeklySchedule.clear();
+    }
 
 
     //Friend Interactions
-    public boolean addFriend(User newFriend);
-    public boolean removeFriend(int friendId);//Parameter? Friend
-    public User getFriend(int friendId);
-    public List<User> getFriendList();
+    public boolean addFriend(User newFriend) {
+        friendList.add(newFriend);
+        return false;
+    }
 
-    public Schedule compareSchedule(Schedule friendSchedule);
+    public boolean removeFriend(int friendId){
+
+        friendList.remove(friendId);
+        return true;
+    }
+
+    public User getFriend(int friendId) {
+        return friendList.get(friendId);
+    }
+
+    public List<User> getFriendList() {
+        return friendList;
+    }
+
+    public Schedule compareSchedule(Schedule friendSchedule) {
+        return null;
+    }
+
+    public ArrayList<TimeFrame> findTimeFrames() {
+        return null;
+    }
 
 
     //Event Interactions
-    public boolean addEvent(Event event);
-    public ArrayList<TimeFrame> findTimeFrames();
-
-    public boolean removeEvent(Event event);
-
-    public Event getEvent(int eventId)
-
-    public BinarySearchTree<Event> getEvents();
-
-    public List<Event> getFriendEvents();//
+    public boolean addEvent(Event event) {
+        return events.add(event);
+    }
 
 
+    public boolean removeEvent(Event event){
+        return events.remove(event);
+    }
+
+    public Event getEvent(int eventId){
+        return events.get(eventId);
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public List<Event> getFriendEvents(){
+        return friendEvents;
+    }
 
 
     //Other System Interactions
-    public Queue<Notification> getNotifications();
-    public boolean removeNotification();
-    public boolean addPost();
-    public boolean deletePost();
-    
-    public void removeMyProfile();
+    public Queue<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public boolean removeNotification(int notifyId) {
+        return notifications.remove(notifyId);
+    }
+
+    public boolean addPost(String postContent) {
+        Post newPost=new Post(postContent, new Calendar(), this);
+        return posts.add(newPost);
+    }
+
+    public boolean deletePost(int postId) {
+        return posts.remove(postId);
+    }
+
+    public void removeMyProfile() {
+
+    }
 
 
 }
