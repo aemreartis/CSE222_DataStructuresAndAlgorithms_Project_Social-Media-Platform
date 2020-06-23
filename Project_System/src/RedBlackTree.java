@@ -121,7 +121,7 @@ public class RedBlackTree<E extends Comparable<E>>
 
     /**
      * Class to represent a Red-Black node
-     * @author Jacob / Koffman & Wolfgang
+     * @author Ahmet Eren Incir
      *
      * @param <E> The data type of items stored in the node. Must be Comparable
      */
