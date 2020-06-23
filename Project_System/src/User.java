@@ -16,7 +16,7 @@ public class User {
     String email;
     String title;
 
-    Schedule weeklySchedule;
+    ArrayList<Integer> weeklySchedule;
 
     Queue<Integer> posts;
     Queue<Integer> myPosts;
@@ -41,7 +41,7 @@ public class User {
     Queue<Integer> notificationIds; //Or stack
 
     public User(System access, int id, String username, String password, String name, String surname,
-                Date birthDate, String department, String email, String title, Schedule weeklySchedule,
+                Date birthDate, String department, String email, String title, ArrayList<Integer> weeklyScheduleCourseIds,
                 Queue<Integer> posts, Queue<Integer> myPosts, LinkedList<Integer> movieIds, LinkedList<Integer> musicIds,
                 LinkedList<Integer> bookIds, ArrayList<Integer> myInterestIds, ArrayList<Integer> friendIdList,
                 List<Integer> friendEventIds, List<Integer> eventIds, Queue<Integer> notificationIds) {
