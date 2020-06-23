@@ -9,8 +9,15 @@ public class Schedule{
         this.courses = new ArrayList<Course>();
     }
 
-    public boolean addCourse(ArrayList<Course> courseList){ return false; }
-    public boolean removeCourse(){return false;}
+    public boolean addCourse(Course courseList){ return false; }
+    public boolean addCourses(ArrayList<Course> courseList){ return false; }
+
+    public boolean removeCourse(Course course){return false;}
+
+    public boolean removeCourses(Course course){return false;}
 
 
+    public void clear() {
+        courses.clear();
+    }
 }
