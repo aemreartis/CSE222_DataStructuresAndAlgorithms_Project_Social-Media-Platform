@@ -184,7 +184,7 @@ public class AVLTree<E extends Comparable<E>>
     /**
      * Class to represent an AVL Node.
      * It extends the BinaryTree.Node by adding the balance field
-     * @author Jacob / Koffman & Wolfgang
+     * @author Ahmet Eren Incir
      *
      * @param <E> The data type of objects stored in the node. Must be a Comparable object.
      */
