@@ -1,18 +1,27 @@
 public interface SystemInterface {
 
-    boolean readMovies();
-    boolean readBooks();
-    boolean readMusics();
-    boolean readAnnouncements();
-    boolean readAvailableUser();
-    boolean readRegisteredUser();
+    void readMovies();
+    void readBooks();
+    void readMusics();
+    void readAnnouncements();
+    void readAvailableUser();
+    void readRegisteredUser();
+    void readPosts();
+    void readCourses();
+    void readClubs();
+    void readEvents();
+    void readRegisteredAdmin();
 
-    boolean writeMovies();
-    boolean writeBooks();
-    boolean writeMusics();
-    boolean writeAnnouncements();
-    boolean writeAvailableUser();
-    boolean writeRegisteredUser();
+    void writeMovies();
+    void writeBooks();
+    void writeMusics();
+    void writeAnnouncements();
+    void writeRegisteredUser();
+    void writeRegisteredAdmin();
+    void writePosts();
+    void writeClubs();
+    void writeCourses();
+    void writeEvents();
 
     boolean loginToSystem();
     boolean signToSystem();
