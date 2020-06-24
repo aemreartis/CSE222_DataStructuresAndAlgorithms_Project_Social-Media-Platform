@@ -6,7 +6,7 @@ import java.util.Queue;
 public class User {
     //User Informations
     System access;
-    int id ;
+    int id;
     String username;
     String password;
     String name;
@@ -16,7 +16,8 @@ public class User {
     String email;
     String title;
 
-    ArrayList<Integer> weeklySchedule;
+    ArrayList<Integer> weeklyScheduleCourseIds;
+    Schedule weeklySchedule;
 
     Queue<Integer> posts;
     Queue<Integer> myPosts;
@@ -31,6 +32,7 @@ public class User {
 
     //FriendList (and Interaction data if needed any)
     ArrayList<Integer> friendIdList;//Students, Groups and Lecturers
+    ArrayList<User> friendList;//Students, Groups and Lecturers
 
 
     List<Integer> friendEventIds;
@@ -55,7 +57,7 @@ public class User {
         this.department = department;
         this.email = email;
         this.title = title;
-        this.weeklySchedule = weeklySchedule;
+        this.weeklyScheduleCourseIds = weeklyScheduleCourseIds;
         this.posts = posts;
         this.myPosts = myPosts;
         this.movieIds = movieIds;
@@ -66,38 +68,49 @@ public class User {
         this.friendEventIds = friendEventIds;
         this.eventIds = eventIds;
         this.notificationIds = notificationIds;
+
+        for (int i = 0; i < access.registeredUser.size(); i++)
+            for (int j = 0; j < friendIdList.size(); j++)
+                if (friendIdList.get(j).compareTo(access.registeredUser.get(i).id) == 0) {
+                    friendList.add(access.registeredUser.get(i));
+                }
+        for (int i = 0; i < access.courses.size(); i++)
+            for (int j = 0; j < weeklyScheduleCourseIds.size(); j++)
+            if(weeklyScheduleCourseIds.get(j).compareTo(access.courses.get(i).id) ==0  ){
+                weeklySchedule.addCourse(access.courses.get(i));
+            }
     }
 
 
     //User Information Methods
     public boolean editUsername(String username) {
-        this.username= username;
+        this.username = username;
         java.lang.System.out.println("Username editted succesfully.");
         return true;
     }
 
     public boolean editPassword(String password) {
-        this.password= password;
+        this.password = password;
         java.lang.System.out.println("Password editted succesfully.");
         return true;
     }
 
     public boolean editName(String name) {
-        this.name=name;
+        this.name = name;
         java.lang.System.out.println("Name editted succesfully.");
         return true;
     }
 
     public boolean editSurname(String surname) {
-        this.surname=surname;
+        this.surname = surname;
         java.lang.System.out.println("Surname editted succesfully.");
         return true;
     }
 
 
-    public boolean editBirthDate(int day,int month,int year) {//parametreler stringe dönüştürebiliriz
-        Date newDate=new Date(day,month,year);
-        this.birthDate=newDate;
+    public boolean editBirthDate(int day, int month, int year) {//parametreler stringe dönüştürebiliriz
+        Date newDate = new Date(day, month, year);
+        this.birthDate = newDate;
         java.lang.System.out.println("Birth date editted succesfully.");
         return true;
     }
@@ -142,18 +155,21 @@ public class User {
     }
 
 
-    public Schedule getSchedule() {
+    public ArrayList<Integer> getSchedule() {
+        return weeklyScheduleCourseIds;
+    }
+
+    public Schedule getWeeklySchedule() {
         return weeklySchedule;
     }
 
-
     //Schedule editting
-    public boolean addCourse(Course course){
-        return weeklySchedule.addCourse(course);
+    public boolean addCourse(Integer courseId) {
+        return weeklyScheduleCourseIds.add(courseId);
     }
 
-    public boolean removeCourse(Course course) {
-        return weeklySchedule.removeCourse(course);
+    public boolean removeCourse(Integer courseId) {
+        return weeklyScheduleCourseIds.remove(courseId);
     }
 
     public void clearSchedule() {
@@ -167,7 +183,7 @@ public class User {
         return false;
     }
 
-    public boolean removeFriend(int friendId){
+    public boolean removeFriend(int friendId) {
 
         friendIdList.remove(friendId);
         return true;
@@ -181,16 +197,9 @@ public class User {
         return null;
     }
 
-    public ArrayList<TimeFrame> compareSchedule(Schedule friendSchedule) {
-
-
-        return null;
+    private List<User> getFriendList() {
+        return friendList;
     }
-
-    public ArrayList<TimeFrame> findTimeFrames() {
-        return null;
-    }
-
 
 /******************************************************************************************/
     /**
@@ -198,6 +207,7 @@ public class User {
      * birleşen coursların arasındaki tüm boş vakitleri alabilmek için day hour minit içeren 3 boyutlu boolean arraye her dolu dakika false olarak işaretlenir
      * sonra true değeri olan hour minit aralığı TimeFrame e cevrilip arrayListine attılır
      * bu array list return edillir
+     *
      * @param friendSchedule
      * @return
      */
@@ -209,14 +219,12 @@ public class User {
         /**
          * Time frame e courseun section TimeFrameleri atanıyor
          */
-        for(int i=0;i<temp.getCourses().size();i++){
-          for(int j=0;j<  temp.getCourses().get(i).getSections().size();j++){
+        for (int i = 0; i < temp.getCourses().size(); i++) {
+            for (int j = 0; j < temp.getCourses().get(i).getSections().size(); j++) {
 
-              timeFrames.add(new TimeFrame(temp.getCourses().get(i).getSections().get(j).getDay(),temp.getCourses().get(i).getSections().get(j).getStartTime(),temp.getCourses().get(i).getSections().get(j).getFinishTime()));
-          }
+                timeFrames.add(new TimeFrame(temp.getCourses().get(i).getSections().get(j).getDay(), temp.getCourses().get(i).getSections().get(j).getStartTime(), temp.getCourses().get(i).getSections().get(j).getFinishTime()));
+            }
         }
-
-
 
 
         boolean[][][] freeTime = new boolean[7][24][60];
@@ -225,13 +233,13 @@ public class User {
         /**
          * ilk başta hafta full boş(true)
          */
-        for(int i=0;i<7;i++){
-            for(int j=0;j<24;j++){
-                for(int k=0;k<60;k++){
-                    freeTime[i][j][k]=true;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 24; j++) {
+                for (int k = 0; k < 60; k++) {
+                    freeTime[i][j][k] = true;
                 }
             }
-    }
+        }
 
 
         /**
@@ -239,123 +247,110 @@ public class User {
          * alttaki for döngüüsnden sonra arrayin true oldugu dakikalar bos zaman
          * döngü günlere göre dalu zamanları false luyor
          */
-        for (int i=0;i<timeFrames.size();i++){
-            if(timeFrames.get(i).getDay().equals("Monday")){
-                int hourFix=0;
+        for (int i = 0; i < timeFrames.size(); i++) {
+            if (timeFrames.get(i).getDay().equals("Monday")) {
+                int hourFix = 0;
                 int minitFix;
-               int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-               int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-               int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                   if(j==59){
-                       hourFix++;
-                       minitFix=j%60;
-                   }
-                   else{
-                       minitFix=j%60;
-                   }
-                   freeTime[0][hourFix+timeFrames.get(i).getStartTime().getHour()][minitFix]=false;
-               }
-            }
-            else if(timeFrames.get(i).getDay().equals("Tuesday")){
-                int hourFix=0;
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
+                        hourFix++;
+                        minitFix = j % 60;
+                    } else {
+                        minitFix = j % 60;
+                    }
+                    freeTime[0][hourFix + timeFrames.get(i).getStartTime().getHour()][minitFix] = false;
+                }
+            } else if (timeFrames.get(i).getDay().equals("Tuesday")) {
+                int hourFix = 0;
                 int minitFix;
-                int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-                int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-                int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                    if(j==59){
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
                         hourFix++;
+                    } else {
+                        minitFix = j % 60;
                     }
-                    else{
-                        minitFix=j%60;
-                    }
-                    freeTime[1][hourFix+timeFrames.get(i).getStartTime().getHour()][j]=false;
+                    freeTime[1][hourFix + timeFrames.get(i).getStartTime().getHour()][j] = false;
                 }
-            }
-             else if(timeFrames.get(i).getDay().equals("Wednesday")){
-                int hourFix=0;
-                int minitFix=0;
-                int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-                int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-                int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                    if(j==59){
-                        hourFix++;
-                        minitFix=j%60;
-                    }
-                    else{
-                        minitFix=j%60;
-                    }
-                    freeTime[2][hourFix+timeFrames.get(i).getStartTime().getHour()][minitFix]=false;
-                }
-            }
-             else if(timeFrames.get(i).getDay().equals("Thursday")){
-                int hourFix=0;
-                int minitFix=0;
-                int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-                int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-                int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                    if(j==59){
-                        hourFix++;
-                        minitFix=j%60;
-                    }
-                    else{
-                        minitFix=j%60;
-                    }
-                    freeTime[3][hourFix+timeFrames.get(i).getStartTime().getHour()][minitFix]=false;
-                }
-            }
-             else if(timeFrames.get(i).getDay().equals("Friday")){
-                int hourFix=0;
-                int minitFix=0;
-                int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-                int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-                int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                    if(j==59){
-                        hourFix++;
-                        minitFix=j%60;
-                    }
-                    else{
-                        minitFix=j%60;
-                    }
-                    freeTime[4][hourFix+timeFrames.get(i).getStartTime().getHour()][minitFix]=false;
-                }
-            }
-             else if(timeFrames.get(i).getDay().equals("Saturday")){
-                int hourFix=0;
-                int minitFix=0;
-                int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-                int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-                int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                    if(j==59){
-                        hourFix++;
-                        minitFix=j%60;
-                    }
-                    else{
-                        minitFix=j%60;
-                    }
-                    freeTime[5][hourFix+timeFrames.get(i).getStartTime().getHour()][minitFix]=false;
-                }
-            }
-             else if(timeFrames.get(i).getDay().equals("Sunday")){
-                int hourFix=0;
+            } else if (timeFrames.get(i).getDay().equals("Wednesday")) {
+                int hourFix = 0;
                 int minitFix = 0;
-                int hour=timeFrames.get(i).getFinishTime().getHour()-timeFrames.get(i).getStartTime().getHour();
-                int minit=timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
-                int count=(60 * hour) + minit;
-                for(int j = timeFrames.get(i).getStartTime().getMinutes() ; j<count + timeFrames.get(i).getStartTime().getMinutes() ;j++){
-                    if(j==59){
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
                         hourFix++;
-                        minitFix=j%60;
+                        minitFix = j % 60;
+                    } else {
+                        minitFix = j % 60;
                     }
-                    else{
-                        minitFix=j%60;
+                    freeTime[2][hourFix + timeFrames.get(i).getStartTime().getHour()][minitFix] = false;
+                }
+            } else if (timeFrames.get(i).getDay().equals("Thursday")) {
+                int hourFix = 0;
+                int minitFix = 0;
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
+                        hourFix++;
+                        minitFix = j % 60;
+                    } else {
+                        minitFix = j % 60;
                     }
-                    freeTime[6][hourFix+timeFrames.get(i).getStartTime().getHour()][minitFix]=false;
+                    freeTime[3][hourFix + timeFrames.get(i).getStartTime().getHour()][minitFix] = false;
+                }
+            } else if (timeFrames.get(i).getDay().equals("Friday")) {
+                int hourFix = 0;
+                int minitFix = 0;
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
+                        hourFix++;
+                        minitFix = j % 60;
+                    } else {
+                        minitFix = j % 60;
+                    }
+                    freeTime[4][hourFix + timeFrames.get(i).getStartTime().getHour()][minitFix] = false;
+                }
+            } else if (timeFrames.get(i).getDay().equals("Saturday")) {
+                int hourFix = 0;
+                int minitFix = 0;
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
+                        hourFix++;
+                        minitFix = j % 60;
+                    } else {
+                        minitFix = j % 60;
+                    }
+                    freeTime[5][hourFix + timeFrames.get(i).getStartTime().getHour()][minitFix] = false;
+                }
+            } else if (timeFrames.get(i).getDay().equals("Sunday")) {
+                int hourFix = 0;
+                int minitFix = 0;
+                int hour = timeFrames.get(i).getFinishTime().getHour() - timeFrames.get(i).getStartTime().getHour();
+                int minit = timeFrames.get(i).getFinishTime().getMinutes() - timeFrames.get(i).getStartTime().getMinutes();
+                int count = (60 * hour) + minit;
+                for (int j = timeFrames.get(i).getStartTime().getMinutes(); j < count + timeFrames.get(i).getStartTime().getMinutes(); j++) {
+                    if (j == 59) {
+                        hourFix++;
+                        minitFix = j % 60;
+                    } else {
+                        minitFix = j % 60;
+                    }
+                    freeTime[6][hourFix + timeFrames.get(i).getStartTime().getHour()][minitFix] = false;
                 }
             }
         }
@@ -366,52 +361,45 @@ public class User {
          * TimeFrame cinsine dönüşüp arrayListe atanıyor
          */
         ArrayList<TimeFrame> resTimeFrame = new ArrayList<>();
-        String day="";
-        for(int i=0;i<7;i++){
-            for(int j=0;j<24;j++){
-                for(int k=0;k<60;k++){
+        String day = "";
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 24; j++) {
+                for (int k = 0; k < 60; k++) {
 
 
-                    if(freeTime[i][j][k]==true){
-                        if(i==0){
+                    if (freeTime[i][j][k] == true) {
+                        if (i == 0) {
                             day = "Monday";
+                        } else if (i == 1) {
+                            day = "Tuesday";
+                        } else if (i == 2) {
+                            day = "Wednesday";
+                        } else if (i == 3) {
+                            day = "Thursday";
+                        } else if (i == 4) {
+                            day = "Friday";
+                        } else if (i == 5) {
+                            day = "Saturday";
+                        } else if (i == 6) {
+                            day = "Sunday";
                         }
-                        else if(i==1){
-                            day="Tuesday";
+                        int m = j;
+                        int n = k;
+                        while (freeTime[i][m][n] == true) {
+                            if (n == 59) {
+                                m++;
+                                n = 0;
+                            }
+                            n++;
                         }
-                        else if(i==2){
-                            day="Wednesday";
-                        }
-                        else if(i==3){
-                            day="Thursday";
-                        }
-                        else if(i==4){
-                            day="Friday";
-                        }
-                        else if(i==5){
-                            day="Saturday";
-                        }
-                        else if(i==6){
-                            day="Sunday";
-                        }
-                        int m=j;
-                        int n=k;
-                       while(freeTime[i][m][n]==true){
-                           if(n==59){
-                               m++;
-                               n=0;
-                           }
-                           n++;
-                       }
 
-                        resTimeFrame.add(new TimeFrame(day,new Time(j,k,0),new Time(m,n,0)));
+                        resTimeFrame.add(new TimeFrame(day, new Time(j, k, 0), new Time(m, n, 0)));
                         /**
                          * j ve k false değerindeki haline çevrildi
                          */
-                        j=m;
-                        k=n;
+                        j = m;
+                        k = n;
                     }
-
 
 
                 }
@@ -424,6 +412,7 @@ public class User {
 
     /**
      * belli bir etkinlik için en çok katılımın sağlanabileceği  zaman aralığını belirliycek
+     *
      * @return
      */
     public TimeFrame findTimeFrames() {
@@ -432,8 +421,8 @@ public class User {
         /**
          * alttaki loop linked list içinde tüm arkadaşlarının karşılastırması var
          */
-        for(int i=0;i<this.getFriendList().size();i++){
-           arrayListLinkedList.add(i,this.compareSchedule(this.getFriendList().get(i).getWeeklySchedule()));
+        for (int i = 0; i < this.getFriendList().size(); i++) {
+            arrayListLinkedList.add(i, this.compareSchedule(this.getFriendList().get(i).getWeeklySchedule()));
         }
 
 
@@ -441,151 +430,139 @@ public class User {
  * haftanın dakikalarında bos friend sayısına eşitliyorumm
  */
         Integer[][][] freeTime = new Integer[7][24][60];
-       for(int i=0;i< arrayListLinkedList.size();i++){
-           for(int j=0;j<arrayListLinkedList.get(i).size();j++){
-               if(arrayListLinkedList.get(i).get(j).getDay().equals("Monday")){
-                   int hourFix=arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                   int minitFix=0;
-                   int hour=arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                   int minit=arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                   int count=(60 * hour) + minit;
-                   for(int k=arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();k<arrayListLinkedList.get(i).get(j).getStartTime().getMinutes()+count;k++){
-                       if(k==59){
-                           minitFix=k%60;
-                           hourFix++;
-                       }
-                       else{
-                           minitFix=k%60;
-                       }
-                       freeTime[0][hourFix][minitFix]++;
-                   }
-               }
-               else if(arrayListLinkedList.get(i).get(j).getDay().equals("Tuesday")){
-                   int hourFix=arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                   int minitFix=0;
-                   int hour=arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                   int minit=arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                   int count=(60 * hour) + minit;
-                   for(int k=arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();k<arrayListLinkedList.get(i).get(j).getStartTime().getMinutes()+count;k++){
-                       if(k==59){
-                           minitFix=k%60;
-                           hourFix++;
-                       }
-                       else{
-                           minitFix=k%60;
-                       }
-                       freeTime[1][hourFix][minitFix]++;
-                   }
-               }
-               else if(arrayListLinkedList.get(i).get(j).getDay().equals("Wednesday")) {
-                   int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                   int minitFix = 0;
-                   int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                   int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                   int count = (60 * hour) + minit;
-                   for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
-                       if (k == 59) {
-                           minitFix = k % 60;
-                           hourFix++;
-                       } else {
-                           minitFix = k % 60;
-                       }
-                       freeTime[2][hourFix][minitFix]++;
-                   }
-               }
-                    else if(arrayListLinkedList.get(i).get(j).getDay().equals("Thursday")){
-                       int hourFix=arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minitFix=0;
-                       int hour=arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minit=arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                       int count=(60 * hour) + minit;
-                       for(int k=arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();k<arrayListLinkedList.get(i).get(j).getStartTime().getMinutes()+count;k++){
-                           if(k==59){
-                               minitFix=k%60;
-                               hourFix++;
-                           }
-                           else{
-                               minitFix=k%60;
-                           }
-                           freeTime[3][hourFix][minitFix]++;
-                       }
-                   }
-                   else if(arrayListLinkedList.get(i).get(j).getDay().equals("Friday")){
-                       int hourFix=arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minitFix=0;
-                       int hour=arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minit=arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                       int count=(60 * hour) + minit;
-                       for(int k=arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();k<arrayListLinkedList.get(i).get(j).getStartTime().getMinutes()+count;k++){
-                           if(k==59){
-                               minitFix=k%60;
-                               hourFix++;
-                           }
-                           else{
-                               minitFix=k%60;
-                           }
-                           freeTime[4][hourFix][minitFix]++;
-                       }
-                   }
-                   else if(arrayListLinkedList.get(i).get(j).getDay().equals("Saturday")){
-                       int hourFix=arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minitFix=0;
-                       int hour=arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minit=arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                       int count=(60 * hour) + minit;
-                       for(int k=arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();k<arrayListLinkedList.get(i).get(j).getStartTime().getMinutes()+count;k++){
-                           if(k==59){
-                               minitFix=k%60;
-                               hourFix++;
-                           }
-                           else{
-                               minitFix=k%60;
-                           }
-                           freeTime[5][hourFix][minitFix]++;
-                       }
-                   }
-                   else if(arrayListLinkedList.get(i).get(j).getDay().equals("Sunday")){
-                       int hourFix=arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minitFix=0;
-                       int hour=arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
-                       int minit=arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
-                       int count=(60 * hour) + minit;
-                       for(int k=arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();k<arrayListLinkedList.get(i).get(j).getStartTime().getMinutes()+count;k++){
-                           if(k==59){
-                               minitFix=k%60;
-                               hourFix++;
-                           }
-                           else{
-                               minitFix=k%60;
-                           }
-                           freeTime[6][hourFix][minitFix]++;
-                       }
-                   }
+        for (int i = 0; i < arrayListLinkedList.size(); i++) {
+            for (int j = 0; j < arrayListLinkedList.get(i).size(); j++) {
+                if (arrayListLinkedList.get(i).get(j).getDay().equals("Monday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[0][hourFix][minitFix]++;
+                    }
+                } else if (arrayListLinkedList.get(i).get(j).getDay().equals("Tuesday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[1][hourFix][minitFix]++;
+                    }
+                } else if (arrayListLinkedList.get(i).get(j).getDay().equals("Wednesday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[2][hourFix][minitFix]++;
+                    }
+                } else if (arrayListLinkedList.get(i).get(j).getDay().equals("Thursday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[3][hourFix][minitFix]++;
+                    }
+                } else if (arrayListLinkedList.get(i).get(j).getDay().equals("Friday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[4][hourFix][minitFix]++;
+                    }
+                } else if (arrayListLinkedList.get(i).get(j).getDay().equals("Saturday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[5][hourFix][minitFix]++;
+                    }
+                } else if (arrayListLinkedList.get(i).get(j).getDay().equals("Sunday")) {
+                    int hourFix = arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minitFix = 0;
+                    int hour = arrayListLinkedList.get(i).get(j).getFinishTime().getHour() - arrayListLinkedList.get(i).get(j).getStartTime().getHour();
+                    int minit = arrayListLinkedList.get(i).get(j).getFinishTime().getMinutes() - arrayListLinkedList.get(i).get(j).getStartTime().getMinutes();
+                    int count = (60 * hour) + minit;
+                    for (int k = arrayListLinkedList.get(i).get(j).getStartTime().getMinutes(); k < arrayListLinkedList.get(i).get(j).getStartTime().getMinutes() + count; k++) {
+                        if (k == 59) {
+                            minitFix = k % 60;
+                            hourFix++;
+                        } else {
+                            minitFix = k % 60;
+                        }
+                        freeTime[6][hourFix][minitFix]++;
+                    }
+                }
 
-               }
-           }
+            }
+        }
 
 
         /**
          * bir zamanda en fazla boşta olan friend zamanı bulma
          */
-        int a=0;
-        int b=0;
-       int c=0;
-       int maxFriendNumber=0;
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        int maxFriendNumber = 0;
 
-       for(int i=0;i<7;i++){
-           for(int j=0;j<24;j++){
-               for(int k=0;k<60;k++){
-                   if(freeTime[i][j][k]>maxFriendNumber){
-                       a=i;
-                       b=j;
-                       c=k;
-                       maxFriendNumber=freeTime[i][j][k];
-                   }
-               }
-           }
-       }
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 24; j++) {
+                for (int k = 0; k < 60; k++) {
+                    if (freeTime[i][j][k] > maxFriendNumber) {
+                        a = i;
+                        b = j;
+                        c = k;
+                        maxFriendNumber = freeTime[i][j][k];
+                    }
+                }
+            }
+        }
 
 
         /********************************************************************************/
@@ -593,65 +570,58 @@ public class User {
         /**
          * maxDeğere bozulana kadar ilerlenip bitiş zamanı belirlenir
          */
-        int x=0,y = 0,z = 0;
+        int x = 0, y = 0, z = 0;
 
-        for(int i=a;i<7;i++) {
+        for (int i = a; i < 7; i++) {
             for (int j = b; j < 24; j++) {
                 for (int k = c; k < 60; k++) {
-                        if(freeTime[i][j][k]==maxFriendNumber){
-                            x=a;
-                            y=b;
-                            z=c;
-                        }
-                        else{
-                            break;
-                        }
+                    if (freeTime[i][j][k] == maxFriendNumber) {
+                        x = a;
+                        y = b;
+                        z = c;
+                    } else {
+                        break;
+                    }
                 }
             }
         }
-        String day="";
-        if(a==0){
-            day="Monday";
-        }
-        else if(a==1){
-            day="Tuesday";
+        String day = "";
+        if (a == 0) {
+            day = "Monday";
+        } else if (a == 1) {
+            day = "Tuesday";
 
-        }
-        else if(a==2){
-            day="Wednesday";
-        }
-        else if(a==3){
-            day="Thursday";
+        } else if (a == 2) {
+            day = "Wednesday";
+        } else if (a == 3) {
+            day = "Thursday";
 
-        }
-        else if(a==4){
-            day="Friday";
-        }
-        else if(a==5){
-            day="Saturday";
+        } else if (a == 4) {
+            day = "Friday";
+        } else if (a == 5) {
+            day = "Saturday";
 
-        }
-        else if(a==6){
-            day="Sunday";
+        } else if (a == 6) {
+            day = "Sunday";
         }
 
-        return new TimeFrame(day,new Time(b,c,0), new Time(y,z,0));
+        return new TimeFrame(day, new Time(b, c, 0), new Time(y, z, 0));
     }
 
-/**************************************************************************************************/
-  
 
-    //Event Interactions
+    /**************************************************************************************************/
+
+//Event Interactions
     public boolean addEvent(Integer eventId) {
         return eventIds.add(eventId);
     }
 
 
-    public boolean removeEvent(Integer eventId){
+    public boolean removeEvent(Integer eventId) {
         return eventIds.remove(eventId);
     }
 
-    public Integer getEvent(int eventId){
+    public Integer getEvent(int eventId) {
         return eventIds.get(eventId);
     }
 
@@ -659,7 +629,7 @@ public class User {
         return eventIds;
     }
 
-    public List<Integer> getFriendEventIds(){
+    public List<Integer> getFriendEventIds() {
         return friendEventIds;
     }
 
@@ -674,7 +644,7 @@ public class User {
     }
 
     public void addPost(String postContent) {
-        Post newPost=new Post(postContent, new Calendar(), this);
+        Post newPost = new Post(postContent, new Calendar(), this.id);
         Integer newPostId = newPost.getId();
         posts.add(newPostId);
     }
