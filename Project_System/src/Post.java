@@ -2,10 +2,10 @@ public class Post {
 
     private String post;
     private Calendar postCalendar;
-    private User postOwner;
+    private int postOwner;
 
 
-    public Post(String post, Calendar postCalendar, User postOwner) {
+    public Post(String post, Calendar postCalendar, int postOwner) {
         this.post = post;
         this.postCalendar = postCalendar;
         this.postOwner = postOwner;
@@ -25,15 +25,5 @@ public class Post {
 
     public void setPostCalendar(Calendar postCalendar) {
         this.postCalendar = postCalendar;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "post='" + post + '\'' +
-                ", postCalendar=" + postCalendar +
-                ", postOwner='" + postOwner.name + '\'' +
-                '}';
     }
 }
