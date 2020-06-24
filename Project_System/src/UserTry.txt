@@ -1,0 +1,26 @@
+1234
+isyan
+0000
+Tugay
+Ipek
+07.01.1997
+Computer Engineering
+tgypk.gp@gmail.com
+Student
+*CSE222
+*CSE234
+*CSE233
+#p1234
+#p1235
+-3456234
+-5342523
+-2345234
++A
++B
++C
+&A
+&B
+&C
+%A
+%B
+%C
