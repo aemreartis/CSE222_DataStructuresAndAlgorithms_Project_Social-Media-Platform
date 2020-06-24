@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class Event implements Comparable<Event> {
-    Interest interest;
     String id;
     String name;
     String description;
