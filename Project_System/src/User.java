@@ -26,8 +26,6 @@ public class User {
     LinkedList<Music> musics;
     LinkedList<Book> books;
 
-    ArrayList<Interest> myInterests; // ???
-
 
     //FriendList (and Interaction data if needed any)
     ArrayList<User> friendList;//Students, Groups and Lecturers
