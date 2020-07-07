@@ -1,0 +1,495 @@
+Picture book
+Absalom, Absalom!
+William Faulkner
+1988
+9.98
+Coming-of-age
+A che punto e la notte
+Carlo Fruttero and Franco Lucentini
+1951
+7.64
+Suspense
+After Many a Summer Dies the Swan
+Aldous Huxley
+1958
+9.73
+Children's
+Ah, Wilderness!
+Eugene O'Neill
+1964
+7.11
+Horror
+Alien Corn (play)
+Sidney Howard
+1952
+6.14
+Suspense
+The Alien Corn (short story)
+W. Somerset Maugham
+2005
+9.03
+Action and adventure
+All Passion Spent
+Vita Sackville-West
+1957
+6.93
+Comic book
+All the King's Men
+Robert Penn Warren
+1951
+8.07
+Picture book
+Alone on a Wide, Wide Sea
+Michael Morpurgo
+1997
+8.38
+Graphic novel
+An Acceptable Time
+Madeleine L'Engle
+1953
+6.33
+Historical fiction
+Antic Hay
+Aldous Huxley
+1951
+8.3
+Crime
+An Evil Cradling
+Brian Keenan
+1949
+6.55
+Political thriller
+Arms and the Man
+George Bernard Shaw
+1973
+9.45
+Chick lit
+As I Lay Dying
+William Faulkner
+1948
+8.4
+Young adult
+A Time to Kill
+John Grisham
+1925
+7.92
+Action and adventure
+Behold the Man
+Michael Moorcock
+1938
+7.07
+Children's
+Beneath the Bleeding
+Val McDermid
+1937
+9.79
+Satire
+Beyond the Mexique Bay
+Aldous Huxley
+1926
+9.96
+Chick lit
+Blithe Spirit
+Noël Coward
+1952
+8.68
+Fairytale
+Blood's a Rover
+James Ellroy
+1957
+9.85
+Alternate history
+Blue Remembered Earth
+Alastair Reynolds
+1977
+6.09
+Short story
+Blue Remembered Hills
+Rosemary Sutcliff
+1975
+9.91
+Suspense
+Bonjour Tristesse
+Françoise Sagan
+1947
+9.81
+Western
+Brandy of the Damned
+Colin Wilson
+1930
+6.82
+Coming-of-age
+Bury My Heart at Wounded Knee
+Dee Brown
+1944
+7.2
+Science fiction
+Butter In a Lordly Dish
+Agatha Christie
+2006
+7.37
+Drama
+By Grand Central Station I Sat Down and Wept
+Elizabeth Smart
+1926
+7.82
+Classic 
+Cabbages and Kings
+O. Henry
+1930
+9.23
+Classic 
+Carrion Comfort
+Dan Simmons
+1983
+7.66
+Western
+A Catskill Eagle
+Robert B. Parker
+1958
+9.65
+Romance
+The Children of Men
+P. D. James
+1926
+9.25
+Chick lit
+Clouds of Witness
+Dorothy L. Sayers
+1938
+9.75
+Thriller
+A Confederacy of Dunces
+John Kennedy Toole
+1970
+9.64
+Short story
+Consider Phlebas
+Iain M. Banks
+1970
+7.29
+Mystery
+Consider the Lilies
+Iain Crichton Smith
+1939
+6.89
+Romance
+Cover Her Face
+P. D. James
+1931
+6.64
+Science fiction
+The Cricket on the Hearth
+Charles Dickens
+1985
+9.48
+Poetry
+The Curious Incident of the Dog in the Night-Time
+Mark Haddon
+1931
+8.68
+Fairytale
+The Daffodil Sky
+H. E. Bates
+2008
+7.87
+Fairytale
+Dance Dance Dance
+Haruki Murakami
+1933
+6.99
+Anthology
+A Darkling Plain
+Philip Reeve
+1923
+9.74
+Action and adventure
+Death Be Not Proud
+John Gunther
+1952
+7.27
+Poetry
+The Doors of Perception
+Aldous Huxley
+1998
+7.17
+Drama
+Down to a Sunless Sea
+David Graham
+1936
+6.57
+Alternate history
+Dulce et Decorum Est
+Wilfred Owen
+2006
+6.82
+Satire
+Dying of the Light
+George R. R. Martin
+1988
+7.82
+Fantasy
+East of Eden
+John Steinbeck
+1982
+9.09
+Alternate history
+Ego Dominus Tuus
+William Butler Yeats
+1938
+9.21
+Chick lit
+Endless Night
+Agatha Christie
+1992
+9.16
+Alternate history
+Everything is Illuminated
+Jonathan Safran Foer
+1972
+6.82
+Anthology
+Eyeless in Gaza
+Aldous Huxley
+1939
+8.21
+Coming-of-age
+Fair Stood the Wind for France
+H. E. Bates
+1989
+9.43
+Science fiction
+Fame Is the Spur
+Howard Spring
+1996
+6.05
+Poetry
+A Fanatic Heart
+Edna O'Brien
+1960
+7.5
+Political thriller
+The Far-Distant Oxus
+Katharine Hull and Pamela Whitlock
+1953
+6.25
+Fantasy
+A Farewell to Arms
+Ernest Hemingway
+2003
+7.06
+Paranormal romance
+Far From the Madding Crowd
+Thomas Hardy
+1933
+7.96
+Poetry
+Fear and Trembling
+Søren Kierkegaard
+1976
+6.54
+Science fiction
+For a Breath I Tarry
+Roger Zelazny
+1928
+6.51
+Fairytale
+For Whom the Bell Tolls
+Ernest Hemingway
+1943
+7.65
+Action and adventure
+Frequent Hearses
+Edmund Crispin
+1968
+8.66
+Suspense
+From Here to Eternity
+James Jones
+1999
+6.84
+Historical fiction
+A Glass of Blessings
+Barbara Pym
+1964
+8.23
+Children's
+The Glory and the Dream
+William Manchester
+2003
+7.39
+Suspense
+The Golden Apples of the Sun
+Ray Bradbury
+1988
+7.8
+Action and adventure
+The Golden Bowl
+Henry James
+1970
+7.57
+Mystery
+Gone with the Wind
+Margaret Mitchell
+1953
+8.53
+Western
+The Grapes of Wrath
+John Steinbeck
+1924
+6.37
+Fantasy
+Great Work of Time
+John Crowley
+1963
+6.24
+Drama
+The Green Bay Tree
+Louis Bromfield
+1952
+7.79
+Drama
+A Handful of Dust
+Evelyn Waugh
+1982
+8.38
+Children's
+Have His Carcase
+Dorothy L. Sayers
+1967
+6.92
+Graphic novel
+The Heart Is a Lonely Hunter
+Carson McCullers
+1981
+7.07
+Picture book
+The Heart Is Deceitful Above All Things
+JT LeRoy
+1955
+8.97
+Graphic novel
+His Dark Materials
+Philip Pullman
+1971
+8.07
+Western
+The House of Mirth
+Edith Wharton
+2003
+6.77
+Graphic novel
+How Sleep the Brave
+H. E. Bates
+1998
+8.22
+Graphic novel
+How Sleep the Brave
+James H. Hunter
+1994
+6.47
+Paranormal romance
+How Sleep the Brave
+John Briley
+1961
+6.85
+Comic book
+I Know Why the Caged Bird Sings
+Maya Angelou
+1998
+9.77
+Short story
+I Sing the Body Electric
+Ray Bradbury
+1970
+9.89
+Western
+I Will Fear No Evil
+Robert A. Heinlein
+1953
+9.48
+Poetry
+If I Forget Thee Jerusalem
+William Faulkner
+1994
+6.07
+Paranormal romance
+If Not Now When
+Primo Levi
+1936
+6.07
+Mystery
+In a Dry Season
+Peter Robinson
+1937
+8.6
+Drama
+In a Glass Darkly
+Sheridan Le Fanu
+1925
+9.59
+Poetry
+In Death Ground
+David Weber & Steve White
+1936
+8.4
+Paranormal romance
+In Dubious Battle
+John Steinbeck
+1957
+6.39
+Comic book
+An Instant in the Wind
+André Brink
+2004
+7.03
+Coming-of-age
+It's a Battlefield
+Graham Greene
+1983
+7.2
+Children's
+Jacob Have I Loved
+Katherine Paterson
+1945
+6.8
+Fantasy
+O Jerusalem!
+Dominique Lapierre and Larry Collins
+1990
+8.17
+Fantasy
+Jesting Pilate
+Aldous Huxley
+2003
+9.58
+Chick lit
+The Last Enemy
+Richard Hillary
+1930
+6.11
+Comic book
+The Last Temptation
+Val McDermid
+1953
+9.45
+Alternate history
+The Lathe of Heaven
+Ursula K. Le Guin
+1960
+8.38
+Historical fiction
+Let Us Now Praise Famous Men
+James Agee
+1955
+6.69
+Thriller
+Lilies of the Field
+William Edmund Barrett
+1996
+7.56
+Young adult
+This Lime Tree Bower
+Conor McPherson
+1931
+8.46

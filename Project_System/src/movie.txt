@@ -1,0 +1,490 @@
+The Shawshank Redemption
+Fantasy.
+Dodo Abashidze
+1950
+6.99
+The Godfather
+Action.
+George Abbott
+1953
+8.76
+The Godfather Part II
+Romance.
+Jim Abrahams
+1996
+8.73
+The Dark Knight
+Comedy.
+Abiola Abrams
+1930
+7.7
+12 Angry Men
+Thriller.
+J. J. Abrams
+1998
+7.63
+Schindler's List
+Drama.
+Ivan Abramson
+2001
+8.42
+Pulp Fiction
+Romance.
+Hany Abu-Assad
+1953
+9.95
+The Good, the Bad and the Ugly
+Action.
+Tengiz Abuladze
+1945
+9.73
+The Lord of the Rings The Return of the King
+Mystery.
+Herbert Achternbusch
+1965
+8.25
+Fight Club
+Romance.
+Andrew Adamson
+1996
+7.26
+The Lord of the Rings The Fellowship of the Ring
+Drama.
+Maren Ade
+1978
+7.09
+Star Wars Episode V - The Empire Strikes Back
+Romance.
+Carine Adler
+2009
+7.8
+Forrest Gump
+Thriller.
+Percy Adlon
+2007
+7.68
+Inception
+Mystery.
+John G. Adolfi
+1933
+7.46
+One Flew Over the Cuckoo's Nest
+Horror.
+Franklin Adreon
+1968
+9.95
+The Lord of the Rings The Two Towers
+Fantasy.
+Ben Affleck
+1959
+7.05
+Goodfellas
+Comedy.
+Alejandro Agresti
+1920
+9.35
+The Matrix
+Romance.
+Aqeel Ahmed
+1995
+6.81
+Star Wars
+Mystery.
+Alexandre Aja
+1961
+8.43
+Seven Samurai
+Mystery.
+Chantal Akerman
+1960
+8.58
+City of God
+Thriller.
+Desiree Akhavan
+1929
+6.21
+Se7en
+Thriller.
+Fatih Akın
+1998
+6.11
+The Silence of the Lambs
+Romance.
+Moustapha Akkad
+1944
+7.19
+The Usual Suspects
+Action.
+R. Kan Albay
+1979
+6.95
+It's a Wonderful Life
+Mystery.
+Barbara Albert
+1951
+7.28
+Life Is Beautiful
+Horror.
+Alan Alda
+1941
+9.78
+Léon The Professional
+Drama.
+Robert Aldrich
+1998
+9.04
+Once Upon a Time in the West
+Drama.
+Tomás Gutiérrez Alea
+1930
+8.17
+Interstellar
+Fantasy.
+Grigori Aleksandrov
+1974
+6.03
+Saving Private Ryan
+Mystery.
+Victoria Aleksanyan
+1926
+8.56
+American History X
+Horror.
+Khalik Allah
+2004
+7.8
+Spirited Away
+Fantasy.
+Marc Allégret
+1957
+9.46
+Casablanca
+Mystery.
+Yves Allégret
+1944
+8.32
+Raiders of the Lost Ark
+Comedy.
+Elizabeth Allen
+1939
+9.94
+Psycho
+Fantasy.
+Irwin Allen
+1981
+8.91
+City Lights
+Mystery.
+Lewis Allen
+1991
+7.06
+Rear Window
+Comedy.
+Woody Allen
+2000
+6.32
+The Intouchables
+Drama.
+Sherman Alexie
+1931
+7.11
+Modern Times
+Romance.
+Syed Ali Raza Usama
+1968
+8.6
+Terminator 2 Judgment Day
+Horror.
+Pedro Almodóvar
+1939
+7.31
+Whiplash
+Mystery.
+Paul Almond
+1963
+9.98
+The Green Mile
+Thriller.
+Robert Altman
+1979
+6.25
+The Pianist
+Mystery.
+Fede Álvarez
+1984
+7.69
+Memento
+Comedy.
+Mathieu Amalric
+1943
+9.3
+The Departed
+Horror.
+Ned Ambler
+1999
+8.52
+Gladiator
+Thriller.
+Gianni Amelio
+1959
+8.91
+Apocalypse Now
+Horror.
+Alejandro Amenábar
+1990
+9.19
+Back to the Future
+Mystery.
+Jon Amiel
+2004
+8.38
+Sunset Blvd.
+Horror.
+Ana Lily Amirpour
+1938
+7.46
+Dr. Strangelove or How I Learned to Stop Worrying and Love the Bomb
+Action.
+Thom Andersen
+1972
+7.16
+The Prestige
+Thriller.
+Lindsay Anderson
+1987
+9.44
+Alien
+Action.
+Michael Anderson
+1922
+6.76
+The Lion King
+Thriller.
+Mitch Anderson
+1936
+7.75
+The Lives of Others
+Thriller.
+Paul Thomas Anderson
+1980
+6.41
+The Great Dictator
+Comedy.
+Paul W. S. Anderson
+1941
+6.02
+Inside Out
+Mystery.
+Wes Anderson
+1986
+6.4
+Cinema Paradiso
+Horror.
+Brad Anderson
+1920
+6.43
+The Shining
+Horror.
+Roy Andersson
+1943
+7.58
+Paths of Glory
+Action.
+Metodi Andonov
+1940
+6.38
+Django Unchained
+Drama.
+Raoul André
+1923
+8.65
+The Dark Knight Rises
+Romance.
+Kostas Andritsos
+1989
+7.49
+WALL·E
+Fantasy.
+Theo Angelopoulos
+1989
+9.4
+American Beauty
+Thriller.
+Kenneth Anger
+1988
+6.2
+Grave of the Fireflies
+Horror.
+Threes Anna
+1922
+9.67
+Aliens
+Action.
+Ken Annakin
+1955
+8.21
+Citizen Kane
+Comedy.
+Jean-Jacques Annaud
+1969
+8.57
+North by Northwest
+Action.
+Hideaki Anno
+1972
+7.47
+Princess Mononoke
+Romance.
+Arnold Antonin
+1958
+6.08
+Vertigo
+Mystery.
+Michelangelo Antonioni
+1928
+7.75
+Oldeuboi
+Mystery.
+Oscar Apfel
+1932
+8.68
+Das Boot
+Thriller.
+Michael Apted
+1957
+7.37
+M
+Mystery.
+Gregg Araki
+1981
+6.01
+Star Wars Episode VI - Return of the Jedi
+Action.
+Alfonso Aráu
+1967
+9.33
+Once Upon a Time in America
+Comedy.
+Denys Arcand
+1967
+9.51
+Amélie
+Mystery.
+George Archainbaud
+1967
+9.9
+Witness for the Prosecution
+Horror.
+Jane Arden
+1972
+9.82
+Reservoir Dogs
+Romance.
+Emile Ardolino
+1951
+8.58
+Braveheart
+Comedy.
+Asia Argento
+1994
+9.47
+Toy Story 3
+Horror.
+Dario Argento
+1949
+9.35
+A Clockwork Orange
+Comedy.
+Dionciel Armstrong
+1995
+9.81
+Double Indemnity
+Horror.
+Gillian Armstrong
+1928
+9.55
+Taxi Driver
+Action.
+Andrea Arnold
+1998
+7.1
+Requiem for a Dream
+Drama.
+Jack Arnold
+1949
+7.49
+To Kill a Mockingbird
+Mystery.
+Darren Aronofsky
+2002
+7.14
+Lawrence of Arabia
+Horror.
+Fernando Arrabal
+1968
+6.96
+Eternal Sunshine of the Spotless Mind
+Romance.
+Miguel Arteta
+1962
+8.28
+Full Metal Jacket
+Action.
+Dorothy Arzner
+2004
+7.71
+The Sting
+Drama.
+Hal Ashby
+1977
+9.23
+Amadeus
+Horror.
+John Mallory Asher
+1946
+6.14
+Bicycle Thieves
+Horror.
+Olivier Assayas
+1939
+6.86
+Singin' in the Rain
+Action.
+Anthony Asquith
+1920
+9.9
+Monty Python and the Holy Grail
+Horror.
+Carlos Atanes
+1961
+7.9
+Snatch.
+Romance.
+Richard Attenborough
+2006
+9.15
+2001 A Space Odyssey
+Romance.
+David Attwood
+1943
+7.63
+The Kid
+Drama.
+Jacques Audiard
+1995
+7.24
+L.A. Confidential
+Mystery.
+Jacqueline Audry
+2000
+7.54
+Rashômon
+Drama.
+John H. Auer
+1926
+8.71
+For a Few Dollars More
+Comedy.
+Bille August
+1922
+9.3
