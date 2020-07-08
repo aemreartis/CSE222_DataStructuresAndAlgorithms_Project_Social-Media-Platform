@@ -308,7 +308,48 @@ public class System implements SystemInterface{
     // When the system stops, all write methods run
 
     public void writeRegisteredUser() throws IOException {
+        FileWriter fileWriter = new FileWriter("src/RegisteredUser.txt",true);
+        for (int i=0 ; i<registeredUser.size() ; ++i){
+            fileWriter.write("\n" + registeredUser.get(i).id);
+            fileWriter.write("\n" + registeredUser.get(i).username);
+            fileWriter.write("\n" + registeredUser.get(i).password);
+            fileWriter.write("\n" + registeredUser.get(i).name);
+            fileWriter.write("\n" + registeredUser.get(i).surname);
+            fileWriter.write("\n" + registeredUser.get(i).getBirthDate().day + "." +registeredUser.get(i).getBirthDate().month + "." + registeredUser.get(i).getBirthDate().year);
+            fileWriter.write("\n" + registeredUser.get(i).department);
+            fileWriter.write("\n" + registeredUser.get(i).email);
+            fileWriter.write("\n" + registeredUser.get(i).title);
+            for(int j=0 ; j<registeredUser.get(i).myPosts.size() ;++j){
+            	Post temp = null;
+            	for(int k=0; k<posts.size(); k++) {
+            		if( registeredUser.get(i).myPosts.get(j).equals(posts.get(k).getPostId()) ) {
+            			temp = posts.get(k);
 
+            		}
+            	}
+      			assert temp != null;  
+                fileWriter.write("\n" + temp.getPost());
+                fileWriter.write("\n" + temp.getPostCalendar().date.day + "." + temp.getPostCalendar().date.month + "." + temp.getPostCalendar().date.year + " " + temp.getPostCalendar().time.hour
+                +"."+temp.getPostCalendar().time.minutes + ":" + temp.getPostCalendar().time.second);
+            }
+            fileWriter.write("\n" +registeredUser.get(i).movies.toString());
+            fileWriter.write("\n" +registeredUser.get(i).musics.toString());
+            fileWriter.write("\n" +registeredUser.get(i).books.toString());
+            for (int j=0 ; j<registeredUser.get(i).friendList.size() ; ++j){
+                fileWriter.write("\n" + registeredUser.get(i).friendList.get(j));
+            }
+            //List<Event> friendEvents?????
+            //List<Event> events;//??? List mi kalacak?
+            // Notification ları User dan silmistik.
+            /*for(int j=0 ; j<registeredUser.get(i).notifications.size() ; ++j){
+                Notification temp = registeredUser.get(i).notifications.poll();
+                assert temp != null;
+                fileWriter.write("\n" + temp.message);
+                fileWriter.write("\n" + temp.date.date.day + "." + temp.date.date.month + "." + temp.date.date.year + " " + temp.date.time.hour + "." + temp.date.time.minutes + ":" + temp.date.time.second);
+                fileWriter.write("\n" + temp.sender); // sender String ID oldu.
+            }*/
+
+        }
     }
 
     public void writePosts() throws IOException {
