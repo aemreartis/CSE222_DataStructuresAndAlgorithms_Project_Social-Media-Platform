@@ -647,6 +647,8 @@ public class User {
 
     //Other System Interactions
 
+        //Other System Interactions
+
     public boolean addPost(String postContent) {
         String postId = "#p" + String.valueOf(access.posts.size());
         Post newPost = new Post( postId ,postContent, new Calendar(), this.id);
@@ -661,5 +663,29 @@ public class User {
     public ArrayList<String> getPosts(){
         return this.myPosts;
     }
+
+    public LinkedList<String> getMovieList() {
+        return movies;
+    }
+
+    public LinkedList<String> getMusicList() {
+        return musics;
+    }
+
+    public LinkedList<String> getBookList() {
+        return books;
+    }
+    
+    public void removeMovie(String movie_id) {
+    	movies.remove(movie_id);
+    }
+    
+    public void removeBook(String book_id) {
+    	books.remove(book_id);
+    }
+
+	public void removeMusic(String music_id) {
+		musics.remove(music_id);	
+	}
 
 }
