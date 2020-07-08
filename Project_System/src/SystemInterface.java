@@ -15,7 +15,7 @@ public interface SystemInterface {
     void writeMovies();
     void writeBooks();
     void writeMusics();
-    void writeAnnouncements();
+    void writeAnnouncements() throws IOException;
     void writeRegisteredUser();
     void writeRegisteredAdmin();
     void writePosts();
