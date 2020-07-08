@@ -2,6 +2,12 @@ public class Calendar {
     Date date;
     Time time;
 
+    public Calendar(){}
+    public Calendar(Date date, Time time) {
+        this.date = date;
+        this.time = time;
+    }
+
     public Date getDate() {
         return date;
     }
