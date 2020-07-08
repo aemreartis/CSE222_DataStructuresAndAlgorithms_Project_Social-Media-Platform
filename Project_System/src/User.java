@@ -16,6 +16,11 @@ public class User {
     String title;
 
     public User(){}
+
+    public String getId() {
+        return id;
+    }
+
     public User(String id, String username, String password, String name, String surname, Date birthDate, String department, String email, String title) {
         this.id = id;
         this.username = username;
@@ -78,7 +83,7 @@ public class User {
     }
 
 
-    public boolean editBirthDate(int day,int month,int year) {//parametreler stringe dÃ¶nÃ¼ÅŸtÃ¼rebiliriz
+    public boolean editBirthDate(int day,int month,int year) {//parametreler stringe dÃƒÂ¶nÃƒÂ¼Ã…Å¸tÃƒÂ¼rebiliriz
         Date newDate=new Date(day,month,year);
         this.birthDate=newDate;
         java.lang.System.out.println("Birth date editted succesfully.");
@@ -132,11 +137,11 @@ public class User {
 
     //Schedule editting
     public boolean addCourse(String course){
-        return weeklySchedule.addCourse(course.id);
+        return weeklySchedule.addCourse(course);
     }
 
-    public boolean removeCourse(Course course) {
-        return weeklySchedule.removeCourse(course.id);
+    public boolean removeCourse(String course) {
+        return weeklySchedule.removeCourse(course);
     }
 
     public void clearSchedule() {
@@ -169,9 +174,9 @@ public class User {
     }
 /******************************************************************************************/
     /**
-     * 2 kiÅŸinin ÅŸheduele lrindeki course lar birleÅŸti
-     * birleÅŸen courslarÄ±n arasÄ±ndaki tÃ¼m boÅŸ vakitleri alabilmek iÃ§in day hour minit iÃ§eren 3 boyutlu boolean arraye her dolu dakika false olarak iÅŸaretlenir
-     * sonra true deÄŸeri olan hour minit aralÄ±ÄŸÄ± TimeFrame e cevrilip arrayListine attÄ±lÄ±r
+     * 2 kiÃ…Å¸inin Ã…Å¸heduele lrindeki course lar birleÃ…Å¸ti
+     * birleÃ…Å¸en courslarÃ„Â±n arasÃ„Â±ndaki tÃƒÂ¼m boÃ…Å¸ vakitleri alabilmek iÃƒÂ§in day hour minit iÃƒÂ§eren 3 boyutlu boolean arraye her dolu dakika false olarak iÃ…Å¸aretlenir
+     * sonra true deÃ„Å¸eri olan hour minit aralÃ„Â±Ã„Å¸Ã„Â± TimeFrame e cevrilip arrayListine attÃ„Â±lÃ„Â±r
      * bu array list return edillir
      * @param weeklySchedule
      * @return
@@ -193,7 +198,7 @@ public class User {
         temp.addCourses(this.getWeeklySchedule().getCourses());
         ArrayList<TimeFrame> timeFrames = new ArrayList<>();
         /**
-         * Time frame e courseun section TimeFrameleri atanÄ±yor
+         * Time frame e courseun section TimeFrameleri atanÃ„Â±yor
          */
         for(int i=0;i<temp.getCourses().size();i++){
           for(int j=0;j<  getMyCourses(temp).get(i).getSections().size();j++){
@@ -205,7 +210,7 @@ public class User {
         boolean[][][] freeTime = new boolean[7][24][60];
 
         /**
-         * ilk baÅŸta hafta full boÅŸ(true)
+         * ilk baÃ…Å¸ta hafta full boÃ…Å¸(true)
          */
         for(int i=0;i<7;i++){
             for(int j=0;j<24;j++){
@@ -217,9 +222,9 @@ public class User {
 
 
         /**
-         * 1,35 - 2,20 ÅŸeklinde gelebilir
-         * alttaki for dÃ¶ngÃ¼Ã¼snden sonra arrayin true oldugu dakikalar bos zaman
-         * dÃ¶ngÃ¼ gÃ¼nlere gÃ¶re dalu zamanlarÄ± false luyor
+         * 1,35 - 2,20 Ã…Å¸eklinde gelebilir
+         * alttaki for dÃƒÂ¶ngÃƒÂ¼ÃƒÂ¼snden sonra arrayin true oldugu dakikalar bos zaman
+         * dÃƒÂ¶ngÃƒÂ¼ gÃƒÂ¼nlere gÃƒÂ¶re dalu zamanlarÃ„Â± false luyor
          */
         for (int i=0;i<timeFrames.size();i++){
             if(timeFrames.get(i).getDay().equals("Monday")){
@@ -344,8 +349,8 @@ public class User {
 
 
         /**
-         * true olan yerler boÅŸ zaman
-         * TimeFrame cinsine dÃ¶nÃ¼ÅŸÃ¼p arrayListe atanÄ±yor
+         * true olan yerler boÃ…Å¸ zaman
+         * TimeFrame cinsine dÃƒÂ¶nÃƒÂ¼Ã…Å¸ÃƒÂ¼p arrayListe atanÃ„Â±yor
          */
         ArrayList<TimeFrame> resTimeFrame = new ArrayList<>();
         String day="";
@@ -388,7 +393,7 @@ public class User {
 
                         resTimeFrame.add(new TimeFrame(day,new Time(j,k,0),new Time(m,n,0)));
                         /**
-                         * j ve k false deÄŸerindeki haline Ã§evrildi
+                         * j ve k false deÃ„Å¸erindeki haline ÃƒÂ§evrildi
                          */
                         j=m;
                         k=n;
@@ -405,14 +410,14 @@ public class User {
     }
 
     /**
-     * belli bir etkinlik iÃ§in en Ã§ok katÄ±lÄ±mÄ±n saÄŸlanabileceÄŸi  zaman aralÄ±ÄŸÄ±nÄ± belirliycek
+     * belli bir etkinlik iÃƒÂ§in en ÃƒÂ§ok katÃ„Â±lÃ„Â±mÃ„Â±n saÃ„Å¸lanabileceÃ„Å¸i  zaman aralÃ„Â±Ã„Å¸Ã„Â±nÃ„Â± belirliycek
      * @return
      */
     public TimeFrame findTimeFrames() {
         List<ArrayList<TimeFrame>> arrayListLinkedList = new LinkedList<ArrayList<TimeFrame>>();
 
         /**
-         * alttaki loop linked list iÃ§inde tÃ¼m arkadaÅŸlarÄ±nÄ±n karÅŸÄ±lastÄ±rmasÄ± var
+         * alttaki loop linked list iÃƒÂ§inde tÃƒÂ¼m arkadaÃ…Å¸larÃ„Â±nÃ„Â±n karÃ…Å¸Ã„Â±lastÃ„Â±rmasÃ„Â± var
          */
         for(int i=0;i<this.getFriendList().size();i++){
             User temp = getFriend(getFriendList().get(i));
@@ -421,7 +426,7 @@ public class User {
 
 
 /**
- * haftanÄ±n dakikalarÄ±nda bos friend sayÄ±sÄ±na eÅŸitliyorumm
+ * haftanÃ„Â±n dakikalarÃ„Â±nda bos friend sayÃ„Â±sÃ„Â±na eÃ…Å¸itliyorumm
  */
         Integer[][][] freeTime = new Integer[7][24][60];
        for(int i=0;i< arrayListLinkedList.size();i++){
@@ -550,7 +555,7 @@ public class User {
 
 
         /**
-         * bir zamanda en fazla boÅŸta olan friend zamanÄ± bulma
+         * bir zamanda en fazla boÃ…Å¸ta olan friend zamanÃ„Â± bulma
          */
         int a=0;
         int b=0;
@@ -574,7 +579,7 @@ public class User {
         /********************************************************************************/
 
         /**
-         * maxDeÄŸere bozulana kadar ilerlenip bitiÅŸ zamanÄ± belirlenir
+         * maxDeÃ„Å¸ere bozulana kadar ilerlenip bitiÃ…Å¸ zamanÃ„Â± belirlenir
          */
         int x=0,y = 0,z = 0;
 
@@ -628,7 +633,7 @@ public class User {
     }
 
 
-    public boolean removeEvent(Event event){
+    public boolean removeEvent(String event){
         return events.remove(event);
     }
 
@@ -646,8 +651,6 @@ public class User {
 
 
     //Other System Interactions
-
-        //Other System Interactions
 
     public boolean addPost(String postContent) {
         String postId = "#p" + String.valueOf(access.posts.size());
@@ -687,5 +690,4 @@ public class User {
 	public void removeMusic(String music_id) {
 		musics.remove(music_id);	
 	}
-
 }
