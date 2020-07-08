@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,10 +43,10 @@ public class Test {
                     String date = scan.nextLine();
                     String[] temp = date.split(".");
                     Date birthdate = new Date(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]), Integer.parseInt(temp[2]));
-                    boolean isSign = system.signToSystem(id,username,password,name,surname,birthdate,department,email,title);
-                    if (isSign){
+                    boolean isSign = system.signToSystem(id, username, password, name, surname, birthdate, department, email, title);
+                    if (isSign) {
                         java.lang.System.out.println("Congratulations, sign-in is successfully.");
-                    }else{
+                    } else {
                         java.lang.System.out.println("Error, your id did not found in available users !");
                     }
                     break;
@@ -110,16 +112,15 @@ public class Test {
             //printAllPost();
 
             int choice = 0;
-            while (choice != 9) {
+            while (choice != 8) {
                 java.lang.System.out.println("1 - My profile page");
                 java.lang.System.out.println("2 - Search users");
-                java.lang.System.out.println("3 - Search interest");
-                java.lang.System.out.println("4 - Create post");
-                java.lang.System.out.println("5 - Create event");
-                java.lang.System.out.println("6 - Search movie");
-                java.lang.System.out.println("7 - Search book");
-                java.lang.System.out.println("8 - Search music");
-                java.lang.System.out.println("9 - Exit");
+                java.lang.System.out.println("3 - Create post");
+                java.lang.System.out.println("4 - Create event");
+                java.lang.System.out.println("5 - Search movie");
+                java.lang.System.out.println("6 - Search book");
+                java.lang.System.out.println("7 - Search music");
+                java.lang.System.out.println("8 - Exit");
                 choice = scan.nextInt();
                 switch (choice) {
                     case 1:     //my profile page
@@ -127,17 +128,15 @@ public class Test {
                         break;
                     case 2:     //search users
                         break;
-                    case 3:     //search interest
+                    case 3:     //create post
                         break;
-                    case 4:     //create post
+                    case 4:     //create event
                         break;
-                    case 5:     //create event
+                    case 5:        // search movie
                         break;
-                    case 6:        // search movie
+                    case 6:        // search book
                         break;
-                    case 7:        // search book
-                        break;
-                    case 8:        // search music
+                    case 7:        // search music
                         break;
                 }
             }
@@ -147,18 +146,13 @@ public class Test {
     public static void profilePage(System system, User user) {
         Scanner scan = new Scanner(java.lang.System.in);
 
-        /*List<String> events = user.getEvents();
-        java.lang.System.out.println("Event List:");
-        for (int i = 0; i < events.size(); i++) {
-            int id = events.get(i);
-            java.lang.System.out.println(system.getEvent(id));
-        }*/
+        //Show events
 
         List<String> posts = user.getPosts();
         java.lang.System.out.println("Post List:");
         for (int i = 0; i < system.posts.size(); i++) {
-            for (int j = 0; j < posts.size();j++){
-                if(system.posts.get(i).getPostId().equals(posts.get(j))){
+            for (int j = 0; j < posts.size(); j++) {
+                if (system.posts.get(i).getPostId().equals(posts.get(j))) {
                     java.lang.System.out.println(system.posts.get(i).toString());
                 }
             }
@@ -184,7 +178,8 @@ public class Test {
                 java.lang.System.out.println("5 - Edit birth date");
                 java.lang.System.out.println("6 - Edit department");
                 java.lang.System.out.println("7 - Edit e-mail");
-                java.lang.System.out.println("8 - Edit title");;
+                java.lang.System.out.println("8 - Edit title");
+                ;
                 selection = scan.nextInt();
                 switch (selection) {
                     case 1: // username
@@ -224,7 +219,8 @@ public class Test {
                 break;
 
             case 2: // Schedule
-                java.lang.System.out.println(user.getSchedule().toString());
+            	//show weekly schedule
+                //java.lang.System.out.println(user.getSchedule().toString());
                 java.lang.System.out.println("1 - Add course");
                 java.lang.System.out.println("2 - Remove course");
                 java.lang.System.out.println("3 - Clear schedule");
@@ -233,16 +229,16 @@ public class Test {
                 switch (selection) {
                     case 1:  // add course
                         java.lang.System.out.println("Courses: ");
-                        for (int i = 0; i < system.courses.size();i++){
-                            java.lang.System.out.println(i+ ") " + system.courses.get(i).toString());
+                        for (int i = 0; i < system.courses.size(); i++) {
+                            java.lang.System.out.println(i + ") " + system.courses.get(i).toString());
                         }
-                        //show courses
+                        //show courses in the system
                         java.lang.System.out.println("Please enter a course id: ");
                         id = scan.nextLine();
                         user.addCourse(id);
                         break;
                     case 2:  // remove course
-
+                    	java.lang.System.out.println("Please enter a course id: ");
                         id = scan.next();
                         user.removeCourse(id);
                         break;
@@ -253,9 +249,9 @@ public class Test {
                 break;
 
             case 3: // Friend List
-                List<Integer> friends = user.getFriendList();
+                List<String> friends = user.getFriendList();
                 java.lang.System.out.println("Friend List:");
-                int friend_id;
+                String friend_id;
                 User friend;
                 int index;
                 for (int i = 0; i < friends.size(); i++) {
@@ -273,7 +269,7 @@ public class Test {
                     case 1:
                         friend_id = friends.get(index3 - 1);
                         friend = system.getUser(friend_id);
-                        showProfilPage(system, friend);
+                        showProfilePage(system, friend);
                         break;
                     case 2:
                         friend_id = friends.get(index - 1);
@@ -283,9 +279,9 @@ public class Test {
                 break;
 
             case 4: // movie list
-                List<Integer> movies = user.getMovieList();
+                LinkedList<String> movies = user.getMovieList();
                 java.lang.System.out.println("Your Movie List:");
-                int movie_id;
+                String movie_id;
                 Movie movie;
                 for (int i = 0; i < movies.size(); i++) {
                     movie_id = movies.get(i);
@@ -311,9 +307,9 @@ public class Test {
                 break;
 
             case 5: // music list
-                List<Integer> musics = user.getMusicList();
+                LinkedList<String> musics = user.getMusicList();
                 java.lang.System.out.println("Your Music List:");
-                int music_id;
+                String music_id;
                 Music music;
                 for (int i = 0; i < musics.size(); i++) {
                     music_id = musics.get(i);
@@ -339,9 +335,9 @@ public class Test {
                 break;
 
             case 6: // book list
-                List<Integer> books = user.getBookList();
+                LinkedList<String> books = user.getBookList();
                 java.lang.System.out.println("Your Book List:");
-                int book_id;
+                String book_id;
                 Book book;
                 for (int i = 0; i < books.size(); i++) {
                     book_id = books.get(i);
@@ -370,12 +366,12 @@ public class Test {
                 break;
             case 8:  //remove post
                 java.lang.System.out.println("Enter post Id:");
-                int PostId = scan.nextInt();
+                String PostId = scan.nextLine();
                 user.deletePost(PostId);
                 break;
             case 9:   //remove event
                 java.lang.System.out.println("Please enter event id");
-                int event_id = scan.nextInt();
+                String event_id = scan.nextLine();
                 user.removeEvent(event_id);
                 break;
         }
@@ -383,8 +379,8 @@ public class Test {
 
     public static void showProfilePage(System system, User user) {
         java.lang.System.out.println(user.getTitle() + "\n" + user.getName() + " " + user.getSurname() + "\n" + user.getDepartment());
-        List<Integer> posts = user.getPosts();
-        List<Integer> events = user.getEvents();
+        ArrayList<String> posts = user.getPosts();
+        List<Event> events = user.getEvents();
         printPosts(system, posts);
         printEvents(system, events);
 
@@ -405,28 +401,28 @@ public class Test {
                 /////
                 break;
             case 3: // movies
-                List<Integer> movies = user.getMovieList();
+                LinkedList<String> movies = user.getMovieList();
                 java.lang.System.out.println("User's Movie List:");
                 for (int i = 0; i < movies.size(); i++) {
-                    int movie_id = movies.get(i);
+                    String movie_id = movies.get(i);
                     Movie movie = system.getMovie(movie_id);
-                    java.lang.System.out.println((i + 1) + ". " + movie.getName() + " - " + movie.getAuthorName());
+                    java.lang.System.out.println((i + 1) + ". " + movie.getName() + " - "+movie.directorName+"Type: "+movie.type);
                 }
                 break;
             case 4: // musics
-                List<Integer> musics = user.getMusicList();
+                LinkedList<String> musics = user.getMusicList();
                 java.lang.System.out.println("User's Music List:");
                 for (int i = 0; i < musics.size(); i++) {
-                    int music_id = musics.get(i);
+                    String music_id = musics.get(i);
                     Music music = system.getMusic(music_id);
                     java.lang.System.out.println((i + 1) + ". " + music.getName() + " - " + music.getArtist());
                 }
                 break;
             case 5: // books
-                List<Integer> books = user.getBookList();
+                LinkedList<String> books = user.getBookList();
                 java.lang.System.out.println("User's Book List:");
                 for (int i = 0; i < books.size(); i++) {
-                    int book_id = books.get(i);
+                    String book_id = books.get(i);
                     Book book = system.getBook(book_id);
                     java.lang.System.out.println((i + 1) + ". " + book.getName() + " - " + book.getAuthorName());
                 }
@@ -434,19 +430,43 @@ public class Test {
         }
     }
 
+    private static void printEvents(System system, List<Event> events) {
+        for (int i = 0; i < events.size(); i++) {
+            java.lang.System.out.println(events.get(i).id);
+            java.lang.System.out.println(events.get(i).name);
+            java.lang.System.out.println(events.get(i).description);
+            java.lang.System.out.println(events.get(i).date);
+            java.lang.System.out.println(events.get(i).ownerId);
+            java.lang.System.out.println(events.get(i).startTime);
+            java.lang.System.out.println(events.get(i).finishTime);
+            java.lang.System.out.println();
+            java.lang.System.out.println();
+        }
+    }
+
+    private static void printPosts(System system, ArrayList<String> posts) {
+        for (int i = 0; i < system.posts.size(); i++) {
+            if (posts.contains(system.posts.get(i).getPostId()))
+                java.lang.System.out.println("Post Id : " + system.posts.get(i).getPostId());
+            java.lang.System.out.println("Post : " + system.posts.get(i).getPost());
+            java.lang.System.out.println("Post Calender : " + system.posts.get(i).getPostCalendar());
+            java.lang.System.out.println("Post owner : " + system.posts.get(i).getPostOwner());
+            java.lang.System.out.println();
+            java.lang.System.out.println();
+        }
+    }
+
     public static void searchUser(System system, User user) {
         Scanner scan = new Scanner(java.lang.System.in);
-        List<Integer> userList = system.getUser;
+        List<User> userList = system.registeredUser;
         java.lang.System.out.println("User List:");
-        int user_id;
         User this_user;
         for (int i = 0; i < userList.size(); i++) {
-            user_id = userList.get(i);
-            this_user = system.getUser(user_id);
+        	this_user = userList.get(i);
             java.lang.System.out.println((i + 1) + ". " + this_user); // tostring gerekiyor
         }
         java.lang.System.out.println("Enter friend Id:");
-        int friend_Id = scan.nextInt();
+        String friend_Id = scan.nextLine();
         this_user = user.getFriend(friend_Id);
         java.lang.System.out.println("Select:");
         java.lang.System.out.println("Show Profile:");
