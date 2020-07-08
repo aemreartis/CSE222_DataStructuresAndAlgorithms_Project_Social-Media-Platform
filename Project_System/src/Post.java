@@ -1,11 +1,13 @@
 public class Post {
 
+    private String postId;
     private String post;
     private Calendar postCalendar;
-    private int postOwner;
+    private String postOwner;
 
 
-    public Post(String post, Calendar postCalendar, int postOwner) {
+    public Post(String postId, String post, Calendar postCalendar, String postOwner) {
+        this.postId = postId;
         this.post = post;
         this.postCalendar = postCalendar;
         this.postOwner = postOwner;
@@ -13,6 +15,14 @@ public class Post {
 
     public String getPost() {
         return post;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public String getPostOwner() {
+        return postOwner;
     }
 
     public void setPost(String post) {
@@ -25,5 +35,15 @@ public class Post {
 
     public void setPostCalendar(Calendar postCalendar) {
         this.postCalendar = postCalendar;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "post='" + post + '\'' +
+                ", postCalendar=" + postCalendar +
+                ", postOwner='" + postOwner + '\'' +
+                '}';
     }
 }
