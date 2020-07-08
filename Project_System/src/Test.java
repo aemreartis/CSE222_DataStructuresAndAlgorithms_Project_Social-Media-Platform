@@ -127,8 +127,10 @@ public class Test {
                         profilePage(system, user);
                         break;
                     case 2:     //search users
+                    	searchUser(system, user);
                         break;
                     case 3:     //create post
+                    	
                         break;
                     case 4:     //create event
                         break;
@@ -253,11 +255,11 @@ public class Test {
                 java.lang.System.out.println("Friend List:");
                 String friend_id;
                 User friend;
-                int index;
+                int index = 0;
                 for (int i = 0; i < friends.size(); i++) {
                     friend_id = friends.get(i);
                     friend = system.getUser(friend_id);
-                    java.lang.System.out.println((i + 1) + ". " + friend.getName() + friend.getSurname());
+                    java.lang.System.out.println(i + ". " + friend.getName() + friend.getSurname());
                 }
                 java.lang.System.out.println("1 - Show the friend profile");
                 java.lang.System.out.println("2 - Remove the friend");
@@ -267,12 +269,12 @@ public class Test {
                 int index3 = scan.nextInt();
                 switch (selection) {
                     case 1:
-                        friend_id = friends.get(index3 - 1);
+                        friend_id = friends.get(index3);
                         friend = system.getUser(friend_id);
                         showProfilePage(system, friend);
                         break;
                     case 2:
-                        friend_id = friends.get(index - 1);
+                        friend_id = friends.get(index);
                         user.removeFriend(friend_id);
                         break;
                 }
@@ -285,8 +287,9 @@ public class Test {
                 Movie movie;
                 for (int i = 0; i < movies.size(); i++) {
                     movie_id = movies.get(i);
-                    movie = system.getMovie(movie_id);
-                    java.lang.System.out.println((i + 1) + ". " + movie.getName() + " (" + movie.getYear() + ")");
+                    //Tree deki elemana erisim yok
+                    //movie = system.getMovie(movie_id);
+                    //java.lang.System.out.println((i + 1) + ". " + movie.getName() + " (" + movie.getYear() + ")");
                 }
                 java.lang.System.out.println("1 - Show informations of the movie");
                 java.lang.System.out.println("2 - Remove the movie");
@@ -297,7 +300,8 @@ public class Test {
                 switch (selection) {
                     case 1:
                         movie_id = movies.get(index4 - 1);
-                        java.lang.System.out.println(system.getMovie(movie_id));
+                        //Tree deki elemana erisim yok
+                        //java.lang.System.out.println(system.getMovie(movie_id));
                         break;
                     case 2:
                         movie_id = movies.get(index4 - 1);
@@ -313,8 +317,9 @@ public class Test {
                 Music music;
                 for (int i = 0; i < musics.size(); i++) {
                     music_id = musics.get(i);
-                    music = system.getMusic(music_id);
-                    java.lang.System.out.println((i + 1) + ". " + music.getName() + " - " + music.getArtist());
+                    //Tree deki elemana erisim yok
+                    //music = system.getMusic(music_id);
+                    //java.lang.System.out.println((i + 1) + ". " + music.getName() + " - " + music.getArtist());
                 }
                 java.lang.System.out.println("1 - Show informations of the music");
                 java.lang.System.out.println("2 - Remove the music");
@@ -325,11 +330,12 @@ public class Test {
                 switch (selection) {
                     case 1:
                         music_id = musics.get(index5 - 1);
-                        java.lang.System.out.println(system.getMusic(music_id));
+                        //Tree deki elemana erisim yok
+                        //java.lang.System.out.println(system.getMusic(music_id));
                         break;
                     case 2:
                         music_id = musics.get(index5 - 1);
-                        user.removeMusic(movie_id);
+                        user.removeMusic(music_id);
                         break;
                 }
                 break;
@@ -341,8 +347,9 @@ public class Test {
                 Book book;
                 for (int i = 0; i < books.size(); i++) {
                     book_id = books.get(i);
-                    book = system.getBook(book_id);
-                    java.lang.System.out.println((i + 1) + ". " + book.getName() + " - " + book.getAuthorName());
+                    //Tree deki elemana erisim yok
+                    //book = system.getBook(book_id);
+                    //java.lang.System.out.println((i + 1) + ". " + book.getName() + " - " + book.getAuthorName());
                 }
                 java.lang.System.out.println("1 - Show informations of the book");
                 java.lang.System.out.println("2 - Remove the book");
@@ -353,7 +360,8 @@ public class Test {
                 switch (selection) {
                     case 1:
                         book_id = books.get(index6 - 1);
-                        java.lang.System.out.println(system.getBook(book_id));
+                        //Tree deki elemana erisim yok
+                        //java.lang.System.out.println(system.getBook(book_id));
                         break;
                     case 2:
                         book_id = books.get(index6 - 1);
@@ -386,10 +394,9 @@ public class Test {
 
         Scanner scan = new Scanner(java.lang.System.in);
         java.lang.System.out.println("1 - Informations about the user");
-        java.lang.System.out.println("2 - User's interest list");
-        java.lang.System.out.println("3 - User's movie list");
-        java.lang.System.out.println("4 - User's music list");
-        java.lang.System.out.println("5 - User's book list");
+        java.lang.System.out.println("2 - User's movie list");
+        java.lang.System.out.println("3 - User's music list");
+        java.lang.System.out.println("4 - User's book list");
         java.lang.System.out.print("Your choice: ");
         int choice = scan.nextInt();
 
@@ -397,34 +404,34 @@ public class Test {
             case 1: // about
                 java.lang.System.out.print(user);
                 break;
-            case 2: // interests
-                /////
-                break;
-            case 3: // movies
+            case 2: // movies
                 LinkedList<String> movies = user.getMovieList();
                 java.lang.System.out.println("User's Movie List:");
                 for (int i = 0; i < movies.size(); i++) {
                     String movie_id = movies.get(i);
-                    Movie movie = system.getMovie(movie_id);
-                    java.lang.System.out.println((i + 1) + ". " + movie.getName() + " - "+movie.directorName+"Type: "+movie.type);
+                    //Tree deki elemana erisim yok
+                    //Movie movie = system.getMovie(movie_id);
+                    //java.lang.System.out.println((i + 1) + ". " + movie.getName() + " - "+movie.directorName+"Type: "+movie.type);
                 }
                 break;
-            case 4: // musics
+            case 3: // musics
                 LinkedList<String> musics = user.getMusicList();
                 java.lang.System.out.println("User's Music List:");
                 for (int i = 0; i < musics.size(); i++) {
                     String music_id = musics.get(i);
-                    Music music = system.getMusic(music_id);
-                    java.lang.System.out.println((i + 1) + ". " + music.getName() + " - " + music.getArtist());
+                    //Tree deki elemana erisim yok
+                    //Music music = system.getMusic(music_id);
+                    //java.lang.System.out.println((i + 1) + ". " + music.getName() + " - " + music.getArtist());
                 }
                 break;
-            case 5: // books
+            case 4: // books
                 LinkedList<String> books = user.getBookList();
                 java.lang.System.out.println("User's Book List:");
                 for (int i = 0; i < books.size(); i++) {
                     String book_id = books.get(i);
-                    Book book = system.getBook(book_id);
-                    java.lang.System.out.println((i + 1) + ". " + book.getName() + " - " + book.getAuthorName());
+                    //Tree deki elemana erisim yok
+                    //Book book = system.getBook(book_id);
+                    //java.lang.System.out.println((i + 1) + ". " + book.getName() + " - " + book.getAuthorName());
                 }
                 break;
         }
@@ -474,7 +481,7 @@ public class Test {
         int selection = scan.nextInt();
         switch (selection) {
             case 1:
-                java.lang.System.out.println(this_user);
+                showProfilePage(system, this_user);
                 break;
             case 2:
                 user.addFriend(this_user);
