@@ -12,15 +12,9 @@ public interface SystemInterface {
     void readEvents();
     void readRegisteredAdmin();
 
-    void writeMovies();
-    void writeBooks();
-    void writeMusics();
     void writeAnnouncements() throws IOException;
     void writeRegisteredUser();
-    void writeRegisteredAdmin();
     void writePosts();
-    void writeClubs();
-    void writeCourses();
     void writeEvents();
 
     User loginUser(String id, String password);
