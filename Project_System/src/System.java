@@ -311,12 +311,31 @@ public class System implements SystemInterface{
 
     }
 
-    public void writePosts(){
-
+    public void writePosts() throws IOException {
+        FileWriter fileWriter = new FileWriter("src/Posts.txt",true);
+        for (int i=0 ; i<posts.size() ; i++){
+            fileWriter.write("\n" + posts.get(i).getPost());
+            fileWriter.write("\n" + posts.get(i).getPostCalendar().date.day + "." +posts.get(i).getPostCalendar().date.month + "." + posts.get(i).getPostCalendar().date.year +" " +
+                    posts.get(i).getPostCalendar().time.hour + "." + posts.get(i).getPostCalendar().time.minutes +":"+posts.get(i).getPostCalendar().time.second);
+            fileWriter.write("\n" + posts.get(i).getPostOwner());
+        }
+        fileWriter.close();
     }
 
-    public void writeEvents(){
-
+    public void writeEvents() throws IOException {
+        FileWriter fileWriter = new FileWriter("src/Events.txt",true);
+        for (int i=0 ; i<events.size() ; i++){
+            Event temp = events.poll();
+            fileWriter.write("\n" + temp.getId());
+            fileWriter.write("\n" + temp.getName());
+            fileWriter.write("\n" + temp.getDescription());
+            fileWriter.write("\n" + temp.getDate().day +"."+ temp.getDate().month +"."+temp.getDate().year);
+            fileWriter.write("\n" + temp.startTime.hour + "." + temp.startTime.minutes + ":" + temp.startTime.second);
+            for(int j=0 ; j<temp.participants.size() ; j++){
+                fileWriter.write("\n" + temp.participants.get(j));
+            }
+        }
+        fileWriter.close();
     }
 
     @Override
