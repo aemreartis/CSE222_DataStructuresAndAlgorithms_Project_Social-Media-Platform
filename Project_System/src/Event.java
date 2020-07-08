@@ -7,14 +7,14 @@ public class Event implements Comparable<Event> {
     Date date;
     Time startTime;
     Time finishTime;
-    User owner;
-    ArrayList<User> participants;
+    String ownerId;
+    ArrayList<String> participants;
 
-    public Event(String id, String name, String description, Date date, Time startTime, Time finishTime, User owner, ArrayList<User> participants) {
+    public Event(String id, String name, String description, Date date, Time startTime, Time finishTime, String ownerId, ArrayList<String> participants) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.participants = participants;
         this.date = date;
         this.startTime = startTime;
@@ -43,11 +43,11 @@ public class Event implements Comparable<Event> {
         return date;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getOwner() {
+        return ownerId;
     }
 
-    public ArrayList<User> getParticipants() {
+    public ArrayList<String> getParticipants() {
         return participants;
     }
 }
