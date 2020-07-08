@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class User {
     //User Informations
     System access;
-    int id ;
+    String id ;
     String username;
     String password;
     String name;
@@ -16,27 +15,34 @@ public class User {
     String email;
     String title;
 
+    public User(){}
+    public User(String id, String username, String password, String name, String surname, Date birthDate, String department, String email, String title) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.birthDate = birthDate;
+        this.department = department;
+        this.email = email;
+        this.title = title;
+    }
+
     Schedule weeklySchedule;
 
-    Queue<Post> posts;
-    Queue<Post> myPosts;
+    ArrayList<String> myPosts;
 
     //Hobbies
-    LinkedList<Movie> movies;
-    LinkedList<Music> musics;
-    LinkedList<Book> books;
-
+    LinkedList<String> movies;
+    LinkedList<String> musics;
+    LinkedList<String> books;
 
     //FriendList (and Interaction data if needed any)
-    ArrayList<User> friendList;//Students, Groups and Lecturers
-
-
+    ArrayList<String> friendList;//Students, Groups and Lecturers
     List<Event> friendEvents;
 
-
     //Other System Variables
-    List<Event> events;//???
-    Queue<Notification> notifications; //Or stack
+    List<Event> events;
 
     public Schedule getWeeklySchedule() {
         return weeklySchedule;
@@ -72,7 +78,7 @@ public class User {
     }
 
 
-    public boolean editBirthDate(int day,int month,int year) {//parametreler stringe dönüştürebiliriz
+    public boolean editBirthDate(int day,int month,int year) {//parametreler stringe dÃ¶nÃ¼ÅŸtÃ¼rebiliriz
         Date newDate=new Date(day,month,year);
         this.birthDate=newDate;
         java.lang.System.out.println("Birth date editted succesfully.");
@@ -125,12 +131,12 @@ public class User {
 
 
     //Schedule editting
-    public boolean addCourse(Course course){
-        return weeklySchedule.addCourse(course);
+    public boolean addCourse(String course){
+        return weeklySchedule.addCourse(course.id);
     }
 
     public boolean removeCourse(Course course) {
-        return weeklySchedule.removeCourse(course);
+        return weeklySchedule.removeCourse(course.id);
     }
 
     public void clearSchedule() {
@@ -140,55 +146,66 @@ public class User {
 
     //Friend Interactions
     public boolean addFriend(User newFriend) {
-        friendList.add(newFriend);
+        friendList.add(newFriend.id);
         return false;
     }
 
-    public boolean removeFriend(int friendId){
-
+    public boolean removeFriend(String friendId){
         friendList.remove(friendId);
         return true;
     }
 
-    public User getFriend(int friendId) {
-        return friendList.get(friendId);
+    public User getFriend(String friendId) {
+        for(int i = 0; i < access.registeredUser.size(); i++){
+            if(access.registeredUser.get(i).id.equals(friendId)){
+                return access.registeredUser.get(i);
+            }
+        }
+        return null;
     }
 
-    public List<User> getFriendList() {
+    public List<String> getFriendList() {
         return friendList;
     }
 /******************************************************************************************/
     /**
-     * 2 kişinin şheduele lrindeki course lar birleşti
-     * birleşen coursların arasındaki tüm boş vakitleri alabilmek için day hour minit içeren 3 boyutlu boolean arraye her dolu dakika false olarak işaretlenir
-     * sonra true değeri olan hour minit aralığı TimeFrame e cevrilip arrayListine attılır
+     * 2 kiÅŸinin ÅŸheduele lrindeki course lar birleÅŸti
+     * birleÅŸen courslarÄ±n arasÄ±ndaki tÃ¼m boÅŸ vakitleri alabilmek iÃ§in day hour minit iÃ§eren 3 boyutlu boolean arraye her dolu dakika false olarak iÅŸaretlenir
+     * sonra true deÄŸeri olan hour minit aralÄ±ÄŸÄ± TimeFrame e cevrilip arrayListine attÄ±lÄ±r
      * bu array list return edillir
-     * @param friendSchedule
+     * @param weeklySchedule
      * @return
      */
+    public ArrayList<Course> getMyCourses(Schedule weeklySchedule){
+        ArrayList<Course> temp = null;
+        for (int i = 0; i < access.courses.size(); i++){
+            for (int j = 0; j < weeklySchedule.getCourses().size(); j++){
+                if (access.courses.get(i).id.equals(weeklySchedule.getCourses().get(j))){
+                    temp.add(access.courses.get(i));
+                }
+            }
+        }
+        return temp;
+    }
     public ArrayList<TimeFrame> compareSchedule(Schedule friendSchedule) {
         Schedule temp = null;
         temp.addCourses(friendSchedule.getCourses());
         temp.addCourses(this.getWeeklySchedule().getCourses());
         ArrayList<TimeFrame> timeFrames = new ArrayList<>();
         /**
-         * Time frame e courseun section TimeFrameleri atanıyor
+         * Time frame e courseun section TimeFrameleri atanÄ±yor
          */
         for(int i=0;i<temp.getCourses().size();i++){
-          for(int j=0;j<  temp.getCourses().get(i).getSections().size();j++){
+          for(int j=0;j<  getMyCourses(temp).get(i).getSections().size();j++){
 
-              timeFrames.add(new TimeFrame(temp.getCourses().get(i).getSections().get(j).getDay(),temp.getCourses().get(i).getSections().get(j).getStartTime(),temp.getCourses().get(i).getSections().get(j).getFinishTime()));
+              timeFrames.add(new TimeFrame(getMyCourses(temp).get(i).getSections().get(j).getDay(),getMyCourses(temp).get(i).getSections().get(j).getStartTime(),getMyCourses(temp).get(i).getSections().get(j).getFinishTime()));
           }
         }
 
-
-
-
         boolean[][][] freeTime = new boolean[7][24][60];
 
-
         /**
-         * ilk başta hafta full boş(true)
+         * ilk baÅŸta hafta full boÅŸ(true)
          */
         for(int i=0;i<7;i++){
             for(int j=0;j<24;j++){
@@ -200,9 +217,9 @@ public class User {
 
 
         /**
-         * 1,35 - 2,20 şeklinde gelebilir
-         * alttaki for döngüüsnden sonra arrayin true oldugu dakikalar bos zaman
-         * döngü günlere göre dalu zamanları false luyor
+         * 1,35 - 2,20 ÅŸeklinde gelebilir
+         * alttaki for dÃ¶ngÃ¼Ã¼snden sonra arrayin true oldugu dakikalar bos zaman
+         * dÃ¶ngÃ¼ gÃ¼nlere gÃ¶re dalu zamanlarÄ± false luyor
          */
         for (int i=0;i<timeFrames.size();i++){
             if(timeFrames.get(i).getDay().equals("Monday")){
@@ -327,8 +344,8 @@ public class User {
 
 
         /**
-         * true olan yerler boş zaman
-         * TimeFrame cinsine dönüşüp arrayListe atanıyor
+         * true olan yerler boÅŸ zaman
+         * TimeFrame cinsine dÃ¶nÃ¼ÅŸÃ¼p arrayListe atanÄ±yor
          */
         ArrayList<TimeFrame> resTimeFrame = new ArrayList<>();
         String day="";
@@ -371,7 +388,7 @@ public class User {
 
                         resTimeFrame.add(new TimeFrame(day,new Time(j,k,0),new Time(m,n,0)));
                         /**
-                         * j ve k false değerindeki haline çevrildi
+                         * j ve k false deÄŸerindeki haline Ã§evrildi
                          */
                         j=m;
                         k=n;
@@ -388,22 +405,23 @@ public class User {
     }
 
     /**
-     * belli bir etkinlik için en çok katılımın sağlanabileceği  zaman aralığını belirliycek
+     * belli bir etkinlik iÃ§in en Ã§ok katÄ±lÄ±mÄ±n saÄŸlanabileceÄŸi  zaman aralÄ±ÄŸÄ±nÄ± belirliycek
      * @return
      */
     public TimeFrame findTimeFrames() {
         List<ArrayList<TimeFrame>> arrayListLinkedList = new LinkedList<ArrayList<TimeFrame>>();
 
         /**
-         * alttaki loop linked list içinde tüm arkadaşlarının karşılastırması var
+         * alttaki loop linked list iÃ§inde tÃ¼m arkadaÅŸlarÄ±nÄ±n karÅŸÄ±lastÄ±rmasÄ± var
          */
         for(int i=0;i<this.getFriendList().size();i++){
-           arrayListLinkedList.add(i,this.compareSchedule(this.getFriendList().get(i).getWeeklySchedule()));
+            User temp = getFriend(getFriendList().get(i));
+           arrayListLinkedList.add(i,this.compareSchedule(temp.getWeeklySchedule()));
         }
 
 
 /**
- * haftanın dakikalarında bos friend sayısına eşitliyorumm
+ * haftanÄ±n dakikalarÄ±nda bos friend sayÄ±sÄ±na eÅŸitliyorumm
  */
         Integer[][][] freeTime = new Integer[7][24][60];
        for(int i=0;i< arrayListLinkedList.size();i++){
@@ -532,7 +550,7 @@ public class User {
 
 
         /**
-         * bir zamanda en fazla boşta olan friend zamanı bulma
+         * bir zamanda en fazla boÅŸta olan friend zamanÄ± bulma
          */
         int a=0;
         int b=0;
@@ -556,7 +574,7 @@ public class User {
         /********************************************************************************/
 
         /**
-         * maxDeğere bozulana kadar ilerlenip bitiş zamanı belirlenir
+         * maxDeÄŸere bozulana kadar ilerlenip bitiÅŸ zamanÄ± belirlenir
          */
         int x=0,y = 0,z = 0;
 
@@ -628,26 +646,20 @@ public class User {
 
 
     //Other System Interactions
-    public Queue<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public boolean removeNotification(int notifyId) {
-        return notifications.remove(notifyId);
-    }
 
     public boolean addPost(String postContent) {
-        Post newPost=new Post(postContent, new Calendar(), this);
-        return posts.add(newPost);
+        String postId = "#p" + String.valueOf(access.posts.size());
+        Post newPost = new Post( postId ,postContent, new Calendar(), this.id);
+        access.posts.add(newPost);
+        return myPosts.add(postId);
     }
 
-    public boolean deletePost(int postId) {
-        return posts.remove(postId);
+    public boolean deletePost(String postId) {
+        return myPosts.remove(postId);
     }
 
-    public void removeMyProfile() {
-
+    public ArrayList<String> getPosts(){
+        return this.myPosts;
     }
-
 
 }
