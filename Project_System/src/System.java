@@ -32,6 +32,18 @@ public class System implements SystemInterface{
         this.events = new LinkedList<>();
         this.announcements = new LinkedList<>();
         this.posts = new ArrayList<>();
+        
+        readRegisteredUser();
+        readPosts();
+        readMovies();
+        readBooks();
+        readMusics();
+        readAvailableUser();
+        readRegisteredUser();
+        readCourses();
+        readClubs();
+        readEvents();
+        readAnnouncements();
     }
 
     // READ METHODS
