@@ -7,7 +7,7 @@ import java.util.*;
 public class System implements SystemInterface{
 
 
-    ArrayList<User> registeredUser;
+    List<User> registeredUser;
     ArrayList<String> availableUser;
     SkipList<Music> musics;
     RedBlackTree<Movie> movies;
@@ -447,4 +447,13 @@ public class System implements SystemInterface{
         }
         return files;
     }
+
+    public User getUser(String friend_id) {
+        for (int i = 0; i < registeredUser.size(); i++) {
+            if (registeredUser.get(i).equals(friend_id))
+                return registeredUser.get(i);
+        }
+        return null;
+    }
+
 }
