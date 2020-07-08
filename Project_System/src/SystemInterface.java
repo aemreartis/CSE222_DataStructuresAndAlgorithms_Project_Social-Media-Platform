@@ -13,9 +13,9 @@ public interface SystemInterface {
     void readRegisteredAdmin();
 
     void writeAnnouncements() throws IOException;
-    void writeRegisteredUser();
-    void writePosts();
-    void writeEvents();
+    void writeRegisteredUser() throws IOException;
+    void writePosts() throws IOException;
+    void writeEvents() throws IOException;
 
     User loginUser(String id, String password);
     Admin loginAdmin(String id, String password);
