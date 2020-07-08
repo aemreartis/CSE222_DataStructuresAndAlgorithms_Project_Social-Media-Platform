@@ -42,16 +42,29 @@ public class Course {
     String name;
     String lecturer;
     ArrayList<Section> sections;
-    ArrayList<User> students;
+    ArrayList<String> students;
 
-    public Course(String id, String name, String lecturer, ArrayList<Section> sections) {
+    public Course(String id, String name, String lecturer, ArrayList<Section> sections, ArrayList<String> students) {
         this.id = id;
         this.name = name;
         this.lecturer = lecturer;
-        this.sections = sections;
+        for (int i = 0; i < sections.size(); i++) {
+            this.sections.add(sections.get(i));
+        }
+        for (int i = 0; i < students.size(); i++) {
+            this.students.add(students.get(i));
+        }
     }
 
     public ArrayList<Section> getSections() {
         return sections;
+    }
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id='" + id + '\'' +
+                ", name=" + name +
+                ", lecturer='" + lecturer + '\'' +
+                '}';
     }
 }
