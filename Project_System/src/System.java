@@ -307,7 +307,7 @@ public class System implements SystemInterface{
     // WRITE METHODS
     // When the system stops, all write methods run
 
-    public void writeRegisteredUser() {
+    public void writeRegisteredUser() throws IOException {
 
     }
 
